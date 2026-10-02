@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "tsc --noEmit",
-    "server:dev": "node --require dotenv/config --loader tsx server.ts",
+    "server:dev": "node --require dotenv/config --import tsx server.ts",
     "server:build": "esbuild server.ts --bundle --platform=node --format=esm --outfile=server.mjs --external:@google/genai --external:express --external:dotenv",
     "server:start": "node server.mjs",
     "start": "npm run server:build && node server.mjs",

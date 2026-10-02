@@ -4935,18 +4935,20 @@ app.get('*', (_req: Request, res: Response) => {
 });
 
 // ── Start ────────────────────────────────────────────────────────────────────
-const PORT = parseInt(process.env.PORT ?? '8080', 10);
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`\n🏥 NHS Hospital AI Agent Backend`);
-  console.log(`   Running on http://0.0.0.0:${PORT}`);
-  console.log(`   API Key: ${API_KEY ? '✓ configured' : '✗ NOT SET — AI endpoints disabled'}`);
-  console.log(`   Model:   ${MODEL}`);
-  console.log(`\nAvailable endpoints:`);
-  console.log(`   GET  /api/health`);
-  console.log(`   POST /api/chat           — streaming AI chat (SSE)`);
-  console.log(`   POST /api/triage         — ESI triage assessment`);
-  console.log(`   POST /api/ward-insights  — operational ward summary`);
-  console.log(`   POST /api/symptom-check  — patient symptom guidance\n`);
-});
+if (!process.env.VERCEL) {
+  const PORT = parseInt(process.env.PORT ?? '8080', 10);
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`\n🏥 NHS Hospital AI Agent Backend`);
+    console.log(`   Running on http://0.0.0.0:${PORT}`);
+    console.log(`   API Key: ${API_KEY ? '✓ configured' : '✗ NOT SET — AI endpoints disabled'}`);
+    console.log(`   Model:   ${MODEL}`);
+    console.log(`\nAvailable endpoints:`);
+    console.log(`   GET  /api/health`);
+    console.log(`   POST /api/chat           — streaming AI chat (SSE)`);
+    console.log(`   POST /api/triage         — ESI triage assessment`);
+    console.log(`   POST /api/ward-insights  — operational ward summary`);
+    console.log(`   POST /api/symptom-check  — patient symptom guidance\n`);
+  });
+}
 
 export default app;
