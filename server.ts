@@ -713,6 +713,7 @@ app.post('/api/chat', async (req: Request, res: Response) => {
   } catch (err) {
     const message = err instanceof Error ? err.message : 'AI error';
     res.write(`data: ${JSON.stringify({ error: message })}\n\n`);
+    res.write('data: [DONE]\n\n');
     res.end();
   }
 });
