@@ -1,4 +1,4 @@
-﻿const API_BASE = 'http://127.0.0.1:8080/api';
+﻿const API_BASE = 'https://digital-hospital-agent.onrender.com/api';
 
 export async function fetchFromApi(endpoint: string, options: RequestInit = {}) {
   try {
