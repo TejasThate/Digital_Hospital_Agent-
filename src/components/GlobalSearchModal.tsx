@@ -83,10 +83,10 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
     (results.facilities && results.facilities.length > 0);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 px-4 bg-slate-900/50 backdrop-blur-xs">
-      <div className="bg-white border border-slate-200 rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden flex flex-col max-h-[80vh] animate-in fade-in zoom-in-95">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 px-4 bg-slate-900/50 ">
+      <div className="bg-white border border-nhs-border rounded-lg shadow-sm max-w-2xl w-full overflow-hidden flex flex-col max-h-[80vh] animate-in fade-in zoom-in-95">
         {/* Search Bar Input Header */}
-        <div className="p-4 border-b border-slate-200 flex items-center gap-3 bg-slate-50/60">
+        <div className="p-4 border-b border-nhs-border flex items-center gap-3 bg-gray-50/60">
           <Search className="w-5 h-5 text-[#003087]" />
           <input
             type="text"
@@ -94,12 +94,12 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search patients, appointments, doctors, resources..."
             autoFocus
-            className="flex-1 bg-transparent text-sm text-slate-900 placeholder:text-slate-400 font-medium focus:outline-none"
+            className="flex-1 bg-transparent text-sm text-nhs-text placeholder:text-slate-400 font-medium focus:outline-none"
           />
           {loading && <Loader2 className="w-4 h-4 animate-spin text-[#003087]" />}
           <button
             onClick={onClose}
-            className="p-1 hover:bg-slate-200/60 rounded-lg text-slate-400 hover:text-slate-600 transition-colors"
+            className="p-1 hover:bg-slate-200/60 rounded-lg text-slate-400 hover:text-nhs-muted transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -110,13 +110,13 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
           {!query.trim() && (
             <div className="text-center py-8 text-slate-400 space-y-1">
               <Search className="w-8 h-8 mx-auto stroke-1 opacity-50" />
-              <p className="font-semibold text-slate-600">Global Enterprise Search</p>
+              <p className="font-semibold text-nhs-muted">Global Enterprise Search</p>
               <p className="text-[11px]">Type at least 2 characters to search across patients, schedules, and clinical resources.</p>
             </div>
           )}
 
           {query.trim() && !loading && !hasResults && (
-            <div className="text-center py-8 text-slate-500 font-medium">
+            <div className="text-center py-8 text-nhs-muted font-medium">
               No matching records found for "{query}"
             </div>
           )}
@@ -124,7 +124,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
           {/* Patients Results */}
           {results.patients && results.patients.length > 0 && (
             <div className="space-y-2">
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+              <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
                 <User className="w-3.5 h-3.5 text-[#003087]" /> Patients
               </p>
               <div className="grid grid-cols-1 gap-1.5">
@@ -132,11 +132,11 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
                   <div
                     key={p.id}
                     onClick={() => { onSelectResult?.('patient', p); onClose(); }}
-                    className="p-2.5 rounded-xl border border-slate-100 hover:border-blue-200 hover:bg-blue-50/40 cursor-pointer flex items-center justify-between transition-colors"
+                    className="p-2.5 rounded-md border border-slate-100 hover:border-blue-200 hover:bg-blue-50/40 cursor-pointer flex items-center justify-between transition-colors"
                   >
                     <div>
-                      <p className="font-bold text-slate-900 text-xs">{p.name || p.user?.name}</p>
-                      <p className="text-[10px] text-slate-500">
+                      <p className="font-semibold text-nhs-text text-xs">{p.name || p.user?.name}</p>
+                      <p className="text-[10px] text-nhs-muted">
                         {p.nhsNumber || `ID: ${p.id}`} · {p.age ? `${p.age} yrs` : ''} {p.gender || ''}
                       </p>
                     </div>
@@ -150,7 +150,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
           {/* Appointments Results */}
           {results.appointments && results.appointments.length > 0 && (
             <div className="space-y-2">
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+              <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
                 <Calendar className="w-3.5 h-3.5 text-[#003087]" /> Appointments
               </p>
               <div className="grid grid-cols-1 gap-1.5">
@@ -158,11 +158,11 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
                   <div
                     key={a.id}
                     onClick={() => { onSelectResult?.('appointment', a); onClose(); }}
-                    className="p-2.5 rounded-xl border border-slate-100 hover:border-blue-200 hover:bg-blue-50/40 cursor-pointer flex items-center justify-between transition-colors"
+                    className="p-2.5 rounded-md border border-slate-100 hover:border-blue-200 hover:bg-blue-50/40 cursor-pointer flex items-center justify-between transition-colors"
                   >
                     <div>
-                      <p className="font-bold text-slate-900 text-xs">{a.reason}</p>
-                      <p className="text-[10px] text-slate-500">
+                      <p className="font-semibold text-nhs-text text-xs">{a.reason}</p>
+                      <p className="text-[10px] text-nhs-muted">
                         {a.patientName || a.patient?.name} · {a.date} {a.time}
                       </p>
                     </div>
@@ -176,7 +176,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
           {/* Doctors Results */}
           {results.doctors && results.doctors.length > 0 && (
             <div className="space-y-2">
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+              <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
                 <Stethoscope className="w-3.5 h-3.5 text-[#003087]" /> Doctors & Clinicians
               </p>
               <div className="grid grid-cols-1 gap-1.5">
@@ -184,11 +184,11 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
                   <div
                     key={d.id}
                     onClick={() => { onSelectResult?.('doctor', d); onClose(); }}
-                    className="p-2.5 rounded-xl border border-slate-100 hover:border-blue-200 hover:bg-blue-50/40 cursor-pointer flex items-center justify-between transition-colors"
+                    className="p-2.5 rounded-md border border-slate-100 hover:border-blue-200 hover:bg-blue-50/40 cursor-pointer flex items-center justify-between transition-colors"
                   >
                     <div>
-                      <p className="font-bold text-slate-900 text-xs">{d.name || d.user?.name}</p>
-                      <p className="text-[10px] text-slate-500">{d.specialization || d.department}</p>
+                      <p className="font-semibold text-nhs-text text-xs">{d.name || d.user?.name}</p>
+                      <p className="text-[10px] text-nhs-muted">{d.specialization || d.department}</p>
                     </div>
                     <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
                   </div>
@@ -200,7 +200,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
           {/* Resources Results */}
           {results.resources && results.resources.length > 0 && (
             <div className="space-y-2">
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+              <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
                 <BookOpen className="w-3.5 h-3.5 text-[#003087]" /> Resources & Guidelines
               </p>
               <div className="grid grid-cols-1 gap-1.5">
@@ -208,11 +208,11 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
                   <div
                     key={r.id}
                     onClick={() => { onSelectResult?.('resource', r); onClose(); }}
-                    className="p-2.5 rounded-xl border border-slate-100 hover:border-blue-200 hover:bg-blue-50/40 cursor-pointer flex items-center justify-between transition-colors"
+                    className="p-2.5 rounded-md border border-slate-100 hover:border-blue-200 hover:bg-blue-50/40 cursor-pointer flex items-center justify-between transition-colors"
                   >
                     <div>
-                      <p className="font-bold text-slate-900 text-xs">{r.title}</p>
-                      <p className="text-[10px] text-slate-500">{r.category}</p>
+                      <p className="font-semibold text-nhs-text text-xs">{r.title}</p>
+                      <p className="text-[10px] text-nhs-muted">{r.category}</p>
                     </div>
                     <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
                   </div>
@@ -223,7 +223,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
         </div>
 
         {/* Footer info */}
-        <div className="p-3 bg-slate-50 border-t border-slate-100 text-[10px] text-slate-400 flex justify-between items-center">
+        <div className="p-3 bg-gray-50 border-t border-slate-100 text-[10px] text-slate-400 flex justify-between items-center">
           <span>Press <kbd className="px-1 bg-white border rounded">Esc</kbd> to close</span>
           <span>Role Restricted Search · NHS Security Compliant</span>
         </div>

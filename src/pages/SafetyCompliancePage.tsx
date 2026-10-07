@@ -115,10 +115,10 @@ export const SafetyCompliancePage: React.FC<SafetyCompliancePageProps> = ({ curr
 
   if (currentRole === 'Patient') {
     return (
-      <div className="bg-[#003087]/5 border border-blue-200 rounded-2xl p-8 max-w-3xl mx-auto text-center space-y-4 shadow-xs mt-8">
+      <div className="bg-[#003087]/5 border border-blue-200 rounded-lg p-8 max-w-3xl mx-auto text-center space-y-4 shadow-sm mt-8">
         <Lock className="w-10 h-10 text-[#003087] mx-auto" />
-        <h2 className="text-base font-extrabold text-[#003087]">Staff Governance & Compliance Restricted</h2>
-        <p className="text-xs text-slate-600 leading-relaxed max-w-lg mx-auto font-medium">
+        <h2 className="text-base font-semibold text-[#003087]">Staff Governance & Compliance Restricted</h2>
+        <p className="text-xs text-nhs-muted leading-relaxed max-w-lg mx-auto font-medium">
           The NHS Safety & Compliance Governance workspace is restricted to authorized hospital administrators and clinical safety officers.
         </p>
       </div>
@@ -130,24 +130,24 @@ export const SafetyCompliancePage: React.FC<SafetyCompliancePageProps> = ({ curr
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">NHS Safety, Audit Governance & Clinical Compliance</h1>
-          <p className="text-xs text-slate-500 font-semibold mt-0.5">
+          <h1 className="text-2xl font-semibold text-nhs-text tracking-tight">NHS Safety, Audit Governance & Clinical Compliance</h1>
+          <p className="text-xs text-nhs-muted font-semibold mt-0.5">
             PostgreSQL Audit Trail · Role Security Verification · LightGBM ML Governance
           </p>
         </div>
       </div>
 
       {/* Control Bar */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-xs flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div className="bg-white rounded-lg border border-nhs-border p-4 shadow-sm flex flex-col sm:flex-row justify-between items-center gap-4">
         <div className="flex items-center gap-3">
-          <span className="font-bold text-xs text-slate-700">Filter Range:</span>
+          <span className="font-semibold text-xs text-slate-700">Filter Range:</span>
           <select
             value={dateRange}
             onChange={(e) => {
               setDateRange(e.target.value);
               fetchComplianceData(1, search, categoryFilter);
             }}
-            className="px-3 py-1.5 border border-slate-300 rounded-xl text-xs font-semibold text-slate-900 focus:ring-2 focus:ring-[#003087] focus:outline-none"
+            className="px-3 py-1.5 border border-slate-300 rounded-md text-xs font-semibold text-nhs-text focus:ring-2 focus:ring-[#003087] focus:outline-none"
           >
             <option value="today">Today</option>
             <option value="7days">Last 7 Days</option>
@@ -159,7 +159,7 @@ export const SafetyCompliancePage: React.FC<SafetyCompliancePageProps> = ({ curr
         <button
           onClick={() => fetchComplianceData(pagination.page, search, categoryFilter)}
           disabled={loading}
-          className="px-3.5 py-1.5 border border-slate-300 hover:bg-slate-50 rounded-xl text-xs font-bold text-slate-700 flex items-center gap-1.5 transition-colors disabled:opacity-50"
+          className="px-3.5 py-1.5 border border-slate-300 hover:bg-gray-50 rounded-md text-xs font-semibold text-slate-700 flex items-center gap-1.5 transition-colors disabled:opacity-50"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
           Refresh Governance Data
@@ -172,32 +172,32 @@ export const SafetyCompliancePage: React.FC<SafetyCompliancePageProps> = ({ curr
         <div className="space-y-6">
           {/* Top Executive KPI Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-xs">
-              <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block">Total Audit Events</span>
+            <div className="bg-white rounded-lg border border-nhs-border p-4 shadow-sm">
+              <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block">Total Audit Events</span>
               <div className="flex items-baseline justify-between mt-1">
                 <span className="text-2xl font-black text-[#003087]">{overview?.auditEventsCount || 1420}</span>
-                <span className="text-xs font-semibold text-slate-500">PostgreSQL Logged</span>
+                <span className="text-xs font-semibold text-nhs-muted">PostgreSQL Logged</span>
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-xs">
-              <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block">Security Events</span>
+            <div className="bg-white rounded-lg border border-nhs-border p-4 shadow-sm">
+              <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block">Security Events</span>
               <div className="flex items-baseline justify-between mt-1">
                 <span className="text-2xl font-black text-amber-600">{overview?.securityEventsCount || 3}</span>
-                <span className="text-xs font-semibold text-slate-500">0 failed logins</span>
+                <span className="text-xs font-semibold text-nhs-muted">0 failed logins</span>
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-xs">
-              <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block">Open Alerts</span>
+            <div className="bg-white rounded-lg border border-nhs-border p-4 shadow-sm">
+              <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block">Open Alerts</span>
               <div className="flex items-baseline justify-between mt-1">
                 <span className="text-2xl font-black text-rose-600">{overview?.openSecurityAlerts || 1}</span>
-                <span className="text-xs font-semibold text-slate-500">Require Review</span>
+                <span className="text-xs font-semibold text-nhs-muted">Require Review</span>
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-xs">
-              <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block">System Status</span>
+            <div className="bg-white rounded-lg border border-nhs-border p-4 shadow-sm">
+              <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block">System Status</span>
               <div className="flex items-baseline justify-between mt-1">
                 <span className="text-2xl font-black text-emerald-600">HEALTHY</span>
                 <span className="text-xs font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
@@ -209,19 +209,19 @@ export const SafetyCompliancePage: React.FC<SafetyCompliancePageProps> = ({ curr
 
           {/* Subsystem System Health Status */}
           {systemHealth && (
-            <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs space-y-3">
-              <h3 className="font-bold text-sm text-slate-900 border-b border-slate-100 pb-2 flex items-center gap-2">
+            <div className="bg-white rounded-lg border border-nhs-border p-5 shadow-sm space-y-3">
+              <h3 className="font-semibold text-sm text-nhs-text border-b border-slate-100 pb-2 flex items-center gap-2">
                 <Server className="w-4 h-4 text-[#003087]" /> Subsystem Infrastructure Health Verification
               </h3>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
                 {Object.entries(systemHealth).map(([key, val]: [string, any]) => (
-                  <div key={key} className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                    <span className="text-[10px] font-extrabold text-slate-400 uppercase block">{key}</span>
-                    <span className="font-bold text-emerald-700 flex items-center gap-1">
+                  <div key={key} className="p-3 bg-gray-50 rounded-md border border-nhs-border space-y-1">
+                    <span className="text-[10px] font-semibold text-slate-400 uppercase block">{key}</span>
+                    <span className="font-semibold text-emerald-700 flex items-center gap-1">
                       <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> {val.status}
                     </span>
-                    <span className="text-[10px] text-slate-500 font-medium block truncate">{val.details}</span>
+                    <span className="text-[10px] text-nhs-muted font-medium block truncate">{val.details}</span>
                   </div>
                 ))}
               </div>
@@ -229,8 +229,8 @@ export const SafetyCompliancePage: React.FC<SafetyCompliancePageProps> = ({ curr
           )}
 
           {/* Active Security & Compliance Alerts */}
-          <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs space-y-3">
-            <h3 className="font-bold text-sm text-slate-900 border-b border-slate-100 pb-2 flex items-center gap-2">
+          <div className="bg-white rounded-lg border border-nhs-border p-5 shadow-sm space-y-3">
+            <h3 className="font-semibold text-sm text-nhs-text border-b border-slate-100 pb-2 flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 text-amber-600" /> Active Security Events & Audit Compliance Alerts
             </h3>
 
@@ -238,32 +238,32 @@ export const SafetyCompliancePage: React.FC<SafetyCompliancePageProps> = ({ curr
               {securityEventsList.map((sec) => (
                 <div
                   key={sec.id}
-                  className={`p-3.5 rounded-xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs ${
+                  className={`p-3.5 rounded-md border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs ${
                     sec.acknowledged
-                      ? 'bg-slate-50 border-slate-200'
+                      ? 'bg-gray-50 border-nhs-border'
                       : 'bg-amber-50/70 border-amber-200 text-amber-950'
                   }`}
                 >
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 bg-amber-600 text-white rounded text-[10px] font-bold">
+                      <span className="px-2 py-0.5 bg-amber-600 text-white rounded text-[10px] font-semibold">
                         {sec.severity}
                       </span>
-                      <span className="font-bold text-slate-900">{sec.eventType}</span>
+                      <span className="font-semibold text-nhs-text">{sec.eventType}</span>
                     </div>
                     <p className="text-slate-700 font-medium">{sec.description}</p>
                   </div>
 
                   <div>
                     {sec.acknowledged ? (
-                      <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-lg border border-emerald-200 flex items-center gap-1">
+                      <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-lg border border-emerald-200 flex items-center gap-1">
                         <CheckCircle2 className="w-3.5 h-3.5" /> Acknowledged
                       </span>
                     ) : (
                       <button
                         onClick={() => handleAcknowledgeEvent(sec.id)}
                         disabled={ackLoadingId === sec.id}
-                        className="px-3.5 py-1.5 bg-[#003087] hover:bg-[#002060] text-white rounded-xl font-bold text-xs shadow-2xs transition-colors disabled:opacity-50 whitespace-nowrap"
+                        className="px-3.5 py-1.5 bg-[#003087] hover:bg-[#002060] text-white rounded-md font-semibold text-xs shadow-2xs transition-colors disabled:opacity-50 whitespace-nowrap"
                       >
                         Acknowledge Event
                       </button>
@@ -275,9 +275,9 @@ export const SafetyCompliancePage: React.FC<SafetyCompliancePageProps> = ({ curr
           </div>
 
           {/* Searchable Audit Logs Table */}
-          <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs space-y-4">
+          <div className="bg-white rounded-lg border border-nhs-border p-5 shadow-sm space-y-4">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-3">
-              <h3 className="font-bold text-sm text-slate-900 flex items-center gap-2">
+              <h3 className="font-semibold text-sm text-nhs-text flex items-center gap-2">
                 <FileText className="w-4 h-4 text-[#003087]" /> Searchable System Audit Trail
               </h3>
 
@@ -293,7 +293,7 @@ export const SafetyCompliancePage: React.FC<SafetyCompliancePageProps> = ({ curr
                       fetchComplianceData(1, val, categoryFilter);
                     }}
                     placeholder="Search user, action, entity..."
-                    className="w-full pl-9 pr-4 py-2 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-[#003087] focus:outline-none"
+                    className="w-full pl-9 pr-4 py-2 border border-slate-300 rounded-md text-xs focus:ring-2 focus:ring-[#003087] focus:outline-none"
                   />
                 </div>
               </div>
@@ -303,7 +303,7 @@ export const SafetyCompliancePage: React.FC<SafetyCompliancePageProps> = ({ curr
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="bg-slate-50 text-slate-500 font-bold border-b border-slate-200/80 text-[10px] uppercase">
+                  <tr className="bg-gray-50 text-nhs-muted font-semibold border-b border-nhs-border text-[10px] uppercase">
                     <th className="p-3">Timestamp</th>
                     <th className="p-3">User / Actor</th>
                     <th className="p-3">Action Event</th>
@@ -313,18 +313,18 @@ export const SafetyCompliancePage: React.FC<SafetyCompliancePageProps> = ({ curr
                 </thead>
                 <tbody className="divide-y divide-slate-100 font-medium">
                   {auditLogsList.map((log) => (
-                    <tr key={log.id} className="hover:bg-slate-50/60 transition-colors">
-                      <td className="p-3 text-slate-500 font-mono text-[11px]">
+                    <tr key={log.id} className="hover:bg-gray-50/60 transition-colors">
+                      <td className="p-3 text-nhs-muted font-mono text-[11px]">
                         {new Date(log.timestamp).toLocaleString()}
                       </td>
-                      <td className="p-3 font-bold text-slate-900">{log.userId}</td>
+                      <td className="p-3 font-semibold text-nhs-text">{log.userId}</td>
                       <td className="p-3">
-                        <span className="px-2 py-0.5 bg-blue-50 text-[#003087] font-bold text-[10px] rounded border border-blue-200">
+                        <span className="px-2 py-0.5 bg-blue-50 text-[#003087] font-semibold text-[10px] rounded border border-blue-200">
                           {log.action}
                         </span>
                       </td>
                       <td className="p-3 font-semibold text-slate-700">{log.entity}</td>
-                      <td className="p-3 font-mono text-slate-500 text-[11px]">{log.entityId}</td>
+                      <td className="p-3 font-mono text-nhs-muted text-[11px]">{log.entityId}</td>
                     </tr>
                   ))}
                 </tbody>

@@ -70,11 +70,11 @@ export const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onNavigateToTa
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Dr. Sarah Jenkins</h1>
-          <p className="text-xs text-slate-500 font-semibold">Staff Home Dashboard · Clinical Operations Overview</p>
+          <h1 className="text-2xl font-semibold text-nhs-text tracking-tight">Dr. Sarah Jenkins</h1>
+          <p className="text-sm text-nhs-muted mt-0.5">Staff Home Dashboard · Clinical Operations Overview</p>
         </div>
-        <span className="px-3 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold rounded-full flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span className="px-3 py-1 bg-green-50 text-green-800 border border-green-200 text-xs font-semibold rounded-full flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
           Clinical Queue Active
         </span>
       </div>
@@ -82,37 +82,37 @@ export const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onNavigateToTa
       {/* Top 3 Stat Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {/* Stat 1 */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs flex items-center justify-between">
+        <div className="bg-white rounded-lg border border-nhs-border p-5 flex items-center justify-between">
           <div>
-            <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">Total Patients Today</p>
-            <p className="text-3xl font-extrabold text-slate-900 mt-1">42</p>
-            <p className="text-[11px] text-emerald-600 font-semibold mt-0.5">8 admissions in 24h</p>
+            <p className="text-xs font-semibold text-nhs-muted uppercase tracking-wider">Total Patients Today</p>
+            <p className="text-3xl font-semibold text-nhs-text mt-1 tabular-nums">42</p>
+            <p className="text-xs text-green-700 font-medium mt-0.5">8 admissions in 24h</p>
           </div>
-          <div className="w-12 h-12 rounded-2xl bg-blue-50 text-[#003087] flex items-center justify-center border border-blue-100">
+          <div className="w-12 h-12 rounded-full bg-blue-50 text-nhs-blue flex items-center justify-center border border-blue-100">
             <Users className="w-6 h-6" />
           </div>
         </div>
 
         {/* Stat 2 */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs flex items-center justify-between">
+        <div className="bg-white rounded-lg border border-nhs-border p-5 flex items-center justify-between">
           <div>
-            <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">Pending Reviews</p>
-            <p className="text-3xl font-extrabold text-slate-900 mt-1">8</p>
-            <p className="text-[11px] text-amber-600 font-semibold mt-0.5">3 high-priority reviews</p>
+            <p className="text-xs font-semibold text-nhs-muted uppercase tracking-wider">Pending Reviews</p>
+            <p className="text-3xl font-semibold text-nhs-text mt-1 tabular-nums">8</p>
+            <p className="text-xs text-amber-600 font-medium mt-0.5">3 high-priority reviews</p>
           </div>
-          <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-100">
+          <div className="w-12 h-12 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-100">
             <ClipboardList className="w-6 h-6" />
           </div>
         </div>
 
         {/* Stat 3 */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs flex items-center justify-between">
+        <div className="bg-white rounded-lg border border-nhs-border p-5 flex items-center justify-between">
           <div>
-            <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">Bed Occupancy</p>
-            <p className="text-3xl font-extrabold text-slate-900 mt-1">87%</p>
-            <p className="text-[11px] text-rose-600 font-semibold mt-0.5">CCU Ward near capacity</p>
+            <p className="text-xs font-semibold text-nhs-muted uppercase tracking-wider">Bed Occupancy</p>
+            <p className="text-3xl font-semibold text-nhs-text mt-1 tabular-nums">87%</p>
+            <p className="text-xs text-red-600 font-medium mt-0.5">CCU Ward near capacity</p>
           </div>
-          <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center border border-rose-100">
+          <div className="w-12 h-12 rounded-full bg-red-50 text-red-600 flex items-center justify-center border border-red-100">
             <BedDouble className="w-6 h-6" />
           </div>
         </div>
@@ -121,41 +121,41 @@ export const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onNavigateToTa
       {/* Middle Grid: Today's Appointments & Triage Alerts */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Appointments Table (2 cols) */}
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs space-y-4">
+        <div className="lg:col-span-2 bg-white rounded-lg border border-nhs-border p-5 space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="font-bold text-sm text-slate-900">Today's Scheduled Appointments</h2>
-              <p className="text-[11px] text-slate-500">Live clinical consultations queue</p>
+              <h2 className="font-semibold text-sm text-nhs-text">Today's Scheduled Appointments</h2>
+              <p className="text-xs text-nhs-muted mt-1">Live clinical consultations queue</p>
             </div>
             <button
               onClick={() => onNavigateToTab?.('Schedules')}
-              className="text-xs font-bold text-[#003087] hover:underline flex items-center gap-1"
+              className="text-sm font-medium text-nhs-blue hover:text-nhs-dark flex items-center gap-1 transition-colors"
             >
-              View All <ArrowUpRight className="w-3.5 h-3.5" />
+              View All <ArrowUpRight className="w-4 h-4" />
             </button>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-xs">
-              <thead>
-                <tr className="text-left text-slate-400 border-b border-slate-100 font-bold uppercase tracking-wider text-[10px]">
-                  <th className="pb-2">Time</th>
-                  <th className="pb-2">Patient Name</th>
-                  <th className="pb-2">Clinical Reason</th>
-                  <th className="pb-2">Triage Level</th>
-                  <th className="pb-2">Status</th>
+          <div className="overflow-x-auto border border-nhs-border rounded-md">
+            <table className="w-full text-left text-sm whitespace-nowrap">
+              <thead className="bg-gray-50 border-b border-nhs-border text-xs font-medium text-nhs-muted">
+                <tr>
+                  <th className="px-4 py-3 text-right">Time</th>
+                  <th className="px-4 py-3">Patient Name</th>
+                  <th className="px-4 py-3">Clinical Reason</th>
+                  <th className="px-4 py-3 text-center">Triage Level</th>
+                  <th className="px-4 py-3">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 font-semibold text-slate-700">
+              <tbody className="divide-y divide-nhs-border text-nhs-text">
                 {appointments.slice(0, 6).map((apt, idx) => (
-                  <tr key={apt.id || idx} className="hover:bg-slate-50/80 transition-colors">
-                    <td className="py-3 text-slate-500 font-mono text-[11px]">{apt.time || '09:00 AM'}</td>
-                    <td className="py-3 font-bold text-slate-900">{apt.patientName || apt.patient?.name || 'John Doe'}</td>
-                    <td className="py-3 text-slate-600">{apt.reason}</td>
-                    <td className="py-3">
+                  <tr key={apt.id || idx} className="hover:bg-gray-50 transition-colors">
+                    <td className="px-4 py-3 text-right text-nhs-muted tabular-nums">{apt.time || '09:00 AM'}</td>
+                    <td className="px-4 py-3 font-medium text-nhs-text">{apt.patientName || apt.patient?.name || 'John Doe'}</td>
+                    <td className="px-4 py-3 text-nhs-muted">{apt.reason}</td>
+                    <td className="px-4 py-3 text-center">
                       <SeverityBadge severity={apt.triage || apt.triageLevel || 'Standard'} size="sm" />
                     </td>
-                    <td className="py-3">
+                    <td className="px-4 py-3">
                       <StatusBadge status={apt.status || 'Confirmed'} size="sm" />
                     </td>
                   </tr>
@@ -166,13 +166,13 @@ export const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onNavigateToTa
         </div>
 
         {/* Triage Alerts (1 col) */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div className="bg-white rounded-lg border border-nhs-border p-5 space-y-4">
+          <div className="flex items-center justify-between border-b border-gray-100 pb-3">
             <div className="flex items-center gap-2">
-              <AlertTriangle className="w-4 h-4 text-rose-600" />
-              <h2 className="font-bold text-sm text-slate-900">Live Triage Alerts</h2>
+              <AlertTriangle className="w-5 h-5 text-red-600" />
+              <h2 className="font-semibold text-sm text-nhs-text">Live Triage Alerts</h2>
             </div>
-            <span className="px-2.5 py-0.5 bg-rose-100 text-rose-800 font-bold text-[10px] rounded-full">
+            <span className="px-3 py-1 bg-red-50 text-red-800 border border-red-200 font-medium text-xs rounded-full">
               {activeAlertsCount} Active
             </span>
           </div>
@@ -185,38 +185,38 @@ export const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onNavigateToTa
               return (
                 <div
                   key={alert.id}
-                  className={`p-3.5 rounded-xl border-l-4 transition-all ${
+                  className={`p-4 rounded-md border-l-4 border-r border-t border-b text-sm space-y-2 ${
                     isCrit
-                      ? 'border-l-rose-600 bg-rose-50/40 border-rose-200'
-                      : 'border-l-amber-500 bg-amber-50/40 border-amber-200'
-                  } border text-xs space-y-1.5`}
+                      ? 'border-l-red-600 bg-red-50/50 border-red-200'
+                      : 'border-l-amber-500 bg-amber-50/50 border-amber-200'
+                  }`}
                 >
-                  <div className="flex items-center justify-between font-bold text-slate-900">
-                    <div className="flex items-center gap-1.5">
+                  <div className="flex items-center justify-between font-semibold text-nhs-text">
+                    <div className="flex items-center gap-2">
                       <SeverityBadge severity={alert.severity || (isCrit ? 'CRITICAL' : 'URGENT')} size="sm" />
                       <span className="truncate max-w-[120px]">{alert.location || alert.patientName}</span>
                     </div>
-                    <span className="text-[10px] text-slate-400 font-medium">{alert.timeAgo || 'Just now'}</span>
+                    <span className="text-xs text-nhs-muted tabular-nums">{alert.timeAgo || 'Just now'}</span>
                   </div>
 
-                  <p className="text-slate-700 leading-snug font-medium">{alert.message}</p>
+                  <p className="text-nhs-text text-sm">{alert.message}</p>
 
-                  <div className="pt-1 flex items-center justify-end gap-2">
+                  <div className="pt-2 flex items-center justify-end gap-2">
                     <button
                       onClick={() => onNavigateToTab?.('Clinical Review')}
-                      className="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-[11px] font-bold inline-flex items-center gap-1"
+                      className="px-3 py-1.5 bg-white hover:bg-gray-50 border border-nhs-border text-nhs-text rounded-md text-xs font-medium inline-flex items-center gap-1.5 transition-colors"
                     >
-                      <Eye className="w-3 h-3" /> Review
+                      <Eye className="w-3.5 h-3.5" /> Review
                     </button>
 
                     {isAck ? (
-                      <span className="text-[11px] text-emerald-700 font-bold flex items-center gap-1 px-2 py-0.5 bg-emerald-50 rounded-lg border border-emerald-200">
-                        <CheckCircle2 className="w-3 h-3" /> Ack
+                      <span className="text-xs text-green-700 font-medium flex items-center gap-1.5 px-3 py-1.5 bg-green-50 rounded-md border border-green-200">
+                        <CheckCircle2 className="w-3.5 h-3.5" /> Ack
                       </span>
                     ) : (
                       <button
                         onClick={() => handleAcknowledge(alert.id)}
-                        className="px-2.5 py-1 bg-[#003087] hover:bg-[#002060] text-white rounded-lg text-[11px] font-bold shadow-2xs"
+                        className="px-3 py-1.5 bg-nhs-blue hover:bg-nhs-dark text-white rounded-md text-xs font-medium transition-colors"
                       >
                         Acknowledge
                       </button>
@@ -229,36 +229,36 @@ export const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onNavigateToTa
         </div>
       </div>
 
-      {/* Bottom Grid: AI Risk Indicators & Recent Patient Activity */}
+      {/* Bottom Grid: Risk Indicators & Recent Patient Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* AI Risk Indicators */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs space-y-3">
-          <h2 className="font-bold text-sm text-slate-900">AI Risk Indicators & Escalations</h2>
-          <p className="text-xs text-slate-500">Pending clinical reviews flagged by LightGBM risk models.</p>
+        {/* Risk Indicators */}
+        <div className="bg-white rounded-lg border border-nhs-border p-5 space-y-3">
+          <h2 className="font-semibold text-sm text-nhs-text">Clinical Risk Indicators & Escalations</h2>
+          <p className="text-xs text-nhs-muted">Pending clinical reviews flagged by risk models.</p>
 
-          <div className="p-4 bg-amber-50/60 border border-amber-200 rounded-xl text-xs space-y-2">
+          <div className="p-4 bg-amber-50/50 border border-amber-200 rounded-md text-sm space-y-2">
             <div className="flex items-center justify-between">
-              <span className="font-bold text-slate-900">Patient #9042 — High Readmission Risk</span>
-              <span className="text-[10px] font-bold px-2 py-0.5 bg-amber-100 text-amber-800 rounded">Moderate Risk</span>
+              <span className="font-semibold text-nhs-text">Patient #9042 — High Readmission Risk</span>
+              <span className="text-xs font-medium px-2 py-0.5 bg-amber-100 text-amber-800 rounded">Moderate Risk</span>
             </div>
-            <p className="text-slate-600 leading-relaxed">
+            <p className="text-nhs-text">
               History of acute coronary syndrome + elevated troponin level (142 ng/L). Recommendation: Cardiology team consult before discharge.
             </p>
           </div>
         </div>
 
         {/* Recent Patient Activity */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs space-y-3">
-          <h2 className="font-bold text-sm text-slate-900">Recent Patient Activity & Audit Log</h2>
-          <div className="space-y-2.5 text-xs">
-            <div className="flex items-start gap-2.5 p-3 bg-slate-50 rounded-xl border border-slate-100">
-              <div className="w-7 h-7 rounded-xl bg-blue-50 text-[#003087] flex items-center justify-center flex-shrink-0 mt-0.5">
+        <div className="bg-white rounded-lg border border-nhs-border p-5 space-y-3">
+          <h2 className="font-semibold text-sm text-nhs-text">Recent Patient Activity & Audit Log</h2>
+          <div className="space-y-3">
+            <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-md border border-gray-200">
+              <div className="w-8 h-8 rounded-full bg-blue-50 text-nhs-blue flex items-center justify-center flex-shrink-0">
                 <Activity className="w-4 h-4" />
               </div>
-              <div className="space-y-0.5">
-                <h4 className="font-bold text-slate-900">Medication Administered</h4>
-                <p className="text-slate-500">Patient #1122 · IV Fluids 500ml 0.9% Saline started.</p>
-                <span className="text-[10px] text-slate-400 font-semibold">12 min ago · Nurse Ward B</span>
+              <div className="space-y-1">
+                <h4 className="font-semibold text-sm text-nhs-text">Medication Administered</h4>
+                <p className="text-sm text-nhs-muted">Patient #1122 · IV Fluids 500ml 0.9% Saline started.</p>
+                <span className="text-xs text-nhs-muted font-medium tabular-nums">12 min ago · Nurse Ward B</span>
               </div>
             </div>
           </div>

@@ -53,21 +53,21 @@ export const BookAppointmentModal: React.FC<{ onClose: () => void; onSuccess?: (
   };
 
   return (
-    <div className="fixed inset-0 bg-black/40 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl border border-gray-200 shadow-2xl max-w-md w-full p-5 space-y-4 relative">
-        <div className="flex items-center justify-between border-b border-gray-100 pb-3">
-          <h3 className="font-bold text-base text-gray-900">Book NHS Appointment</h3>
+    <div className="fixed inset-0 bg-black/40  z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-lg border border-nhs-border shadow-sm max-w-md w-full p-5 space-y-4 relative">
+        <div className="flex items-center justify-between border-b border-nhs-border pb-3">
+          <h3 className="font-semibold text-base text-nhs-text">Book NHS Appointment</h3>
           <button onClick={onClose} className="p-1 hover:bg-gray-100 rounded-full">
-            <X className="w-4 h-4 text-gray-500" />
+            <X className="w-4 h-4 text-nhs-muted" />
           </button>
         </div>
 
         {submitted ? (
           <div className="py-8 text-center space-y-3">
             <CheckCircle2 className="w-12 h-12 text-green-600 mx-auto" />
-            <h4 className="font-bold text-gray-900 text-base">Appointment Booked!</h4>
-            <div className="text-xs text-gray-600 bg-green-50/70 p-3 rounded-xl border border-green-200 text-left space-y-1 max-w-xs mx-auto">
-              <p className="font-bold text-green-900">{confirmedApt?.reason || reason}</p>
+            <h4 className="font-semibold text-nhs-text text-base">Appointment Booked!</h4>
+            <div className="text-xs text-nhs-muted bg-green-50/70 p-3 rounded-md border border-green-200 text-left space-y-1 max-w-xs mx-auto">
+              <p className="font-semibold text-green-900">{confirmedApt?.reason || reason}</p>
               <p>📅 {confirmedApt?.date || date} at {confirmedApt?.time || time}</p>
               <p>👨‍⚕️ {confirmedApt?.doctorName || 'Dr. Sarah Jenkins'}</p>
               <p>📍 {confirmedApt?.room || 'Room 204, Cardiology'}</p>
@@ -77,18 +77,18 @@ export const BookAppointmentModal: React.FC<{ onClose: () => void; onSuccess?: (
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4 text-xs">
             {errorMsg && (
-              <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-xs font-semibold flex items-start gap-2">
+              <div className="p-3 bg-red-50 border border-red-200 rounded-md text-red-700 text-xs font-semibold flex items-start gap-2">
                 <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
                 <span>{errorMsg}</span>
               </div>
             )}
 
             <div>
-              <label className="block font-bold text-gray-700 mb-1">Reason for Visit</label>
+              <label className="block font-semibold text-nhs-muted mb-1">Reason for Visit</label>
               <select
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
-                className="w-full border border-gray-300 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-[#003087]"
+                className="w-full border border-gray-300 rounded-md px-3 py-2 text-xs focus:ring-2 focus:ring-[#003087]"
               >
                 <option value="Follow-up Assessment">Follow-up Assessment</option>
                 <option value="Acute Pain Review">Acute Pain Review</option>
@@ -100,25 +100,25 @@ export const BookAppointmentModal: React.FC<{ onClose: () => void; onSuccess?: (
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block font-bold text-gray-700 mb-1 flex items-center gap-1">
-                  <Calendar className="w-3.5 h-3.5 text-gray-500" /> Preferred Date
+                <label className="block font-semibold text-nhs-muted mb-1 flex items-center gap-1">
+                  <Calendar className="w-3.5 h-3.5 text-nhs-muted" /> Preferred Date
                 </label>
                 <input
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-full border border-gray-300 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-[#003087]"
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 text-xs focus:ring-2 focus:ring-[#003087]"
                 />
               </div>
 
               <div>
-                <label className="block font-bold text-gray-700 mb-1 flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5 text-gray-500" /> Time Slot
+                <label className="block font-semibold text-nhs-muted mb-1 flex items-center gap-1">
+                  <Clock className="w-3.5 h-3.5 text-nhs-muted" /> Time Slot
                 </label>
                 <select
                   value={time}
                   onChange={(e) => setTime(e.target.value)}
-                  className="w-full border border-gray-300 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-[#003087]"
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 text-xs focus:ring-2 focus:ring-[#003087]"
                 >
                   <option value="09:00">09:00 AM</option>
                   <option value="10:30">10:30 AM</option>
@@ -130,14 +130,14 @@ export const BookAppointmentModal: React.FC<{ onClose: () => void; onSuccess?: (
             </div>
 
             <div>
-              <label className="block font-bold text-gray-700 mb-1 flex items-center gap-1">
-                <User className="w-3.5 h-3.5 text-gray-500" /> Specialty / Doctor
+              <label className="block font-semibold text-nhs-muted mb-1 flex items-center gap-1">
+                <User className="w-3.5 h-3.5 text-nhs-muted" /> Specialty / Doctor
               </label>
               {doctorsList.length > 0 ? (
                 <select
                   value={doctorId}
                   onChange={(e) => setDoctorId(e.target.value)}
-                  className="w-full border border-gray-300 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-[#003087] font-medium"
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 text-xs focus:ring-2 focus:ring-[#003087] font-medium"
                 >
                   {doctorsList.map((d) => (
                     <option key={d.id} value={d.id}>
@@ -150,7 +150,7 @@ export const BookAppointmentModal: React.FC<{ onClose: () => void; onSuccess?: (
                   type="text"
                   value="Dr. Sarah Jenkins (Cardiology)"
                   disabled
-                  className="w-full bg-gray-100 border border-gray-200 rounded-xl px-3 py-2 text-xs text-gray-600 font-medium"
+                  className="w-full bg-gray-100 border border-nhs-border rounded-md px-3 py-2 text-xs text-nhs-muted font-medium"
                 />
               )}
             </div>
@@ -160,14 +160,14 @@ export const BookAppointmentModal: React.FC<{ onClose: () => void; onSuccess?: (
                 type="button"
                 onClick={onClose}
                 disabled={loading}
-                className="px-4 py-2 border border-gray-300 rounded-xl text-gray-700 font-semibold hover:bg-gray-50 disabled:opacity-50"
+                className="px-4 py-2 border border-gray-300 rounded-md text-nhs-muted font-semibold hover:bg-gray-50 disabled:opacity-50"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={loading}
-                className="px-4 py-2 bg-[#003087] text-white rounded-xl font-bold hover:bg-[#005eb8] transition-colors flex items-center gap-2 disabled:opacity-50"
+                className="px-4 py-2 bg-[#003087] text-white rounded-md font-semibold hover:bg-[#005eb8] transition-colors flex items-center gap-2 disabled:opacity-50"
               >
                 {loading && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                 {loading ? 'Booking...' : 'Confirm Booking'}

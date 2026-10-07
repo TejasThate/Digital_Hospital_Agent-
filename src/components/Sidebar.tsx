@@ -76,16 +76,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* EPR Sub-header */}
         <div className="flex items-center justify-between px-1">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-lg bg-[#003087] text-white font-bold flex items-center justify-center text-xs">
+            <div className="w-6 h-6 rounded-lg bg-[#003087] text-white font-semibold flex items-center justify-center text-xs">
               +
             </div>
             <div>
-              <p className="text-xs font-bold text-[#003087]">NHS Central Trust</p>
+              <p className="text-xs font-semibold text-[#003087]">NHS Central Trust</p>
               <p className="text-[10px] text-slate-400 font-semibold">Acute Clinical EPR · RGT01</p>
             </div>
           </div>
           {onCloseMobile && (
-            <button onClick={onCloseMobile} className="lg:hidden p-1 text-slate-400 hover:text-slate-600">
+            <button onClick={onCloseMobile} className="lg:hidden p-1 text-slate-400 hover:text-nhs-muted">
               <X className="w-5 h-5" />
             </button>
           )}
@@ -94,7 +94,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* New Admission Button */}
         <button
           onClick={() => { if (onCloseMobile) onCloseMobile(); onNewAdmission?.(); }}
-          className="w-full py-2.5 px-4 bg-[#0072ce] hover:bg-[#005eb8] text-white rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition-colors"
+          className="w-full py-2.5 px-4 bg-[#0072ce] hover:bg-[#005eb8] text-white rounded-md font-semibold text-xs flex items-center justify-center gap-2 shadow-sm transition-colors"
         >
           <Plus className="w-4 h-4 stroke-[3]" />
           New Admission
@@ -104,7 +104,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <nav className="space-y-4 pt-1">
           {sections.map((sec) => (
             <div key={sec.title} className="space-y-1">
-              <p className="text-[10px] font-bold text-slate-400 tracking-wider px-3 uppercase">
+              <p className="text-[10px] font-semibold text-slate-400 tracking-wider px-3 uppercase">
                 {sec.title}
               </p>
               {sec.items.map((item) => {
@@ -114,10 +114,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   <button
                     key={item.id}
                     onClick={() => handleSelect(item.id)}
-                    className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
+                    className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-xs font-semibold  ${
                       isActive
-                        ? 'bg-blue-50 text-[#003087] font-bold shadow-2xs border border-blue-200/60'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                        ? 'bg-blue-50 text-[#003087] font-semibold shadow-2xs border border-blue-200/60'
+                        : 'text-nhs-muted hover:text-nhs-text hover:bg-gray-50'
                     }`}
                   >
                     <Icon className={`w-4 h-4 ${isActive ? 'text-[#003087]' : 'text-slate-400'}`} />
@@ -134,7 +134,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <div className="border-t border-slate-100 pt-3">
         <button
           onClick={() => handleSelect('Sign Out')}
-          className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition-colors"
+          className="w-full flex items-center gap-3 px-3 py-2 rounded-md text-xs font-semibold text-nhs-muted hover:text-rose-600 hover:bg-rose-50 transition-colors"
         >
           <LogOut className="w-4 h-4 text-slate-400" />
           Sign Out
@@ -146,15 +146,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
   return (
     <>
       {/* Desktop Sidebar Rail */}
-      <aside className="hidden lg:block w-64 bg-white border-r border-slate-200/90 min-h-[calc(100vh-57px)] flex-shrink-0">
+      <aside className="hidden lg:block w-64 bg-white border-r border-nhs-border/90 min-h-[calc(100vh-57px)] flex-shrink-0">
         {content}
       </aside>
 
       {/* Mobile Sidebar Overlay Drawer */}
       {isOpenMobile && (
         <div className="lg:hidden fixed inset-0 z-50 flex">
-          <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs" onClick={onCloseMobile} />
-          <aside className="relative w-72 max-w-[80vw] bg-white h-full shadow-2xl z-10 flex flex-col">
+          <div className="fixed inset-0 bg-slate-900/40 " onClick={onCloseMobile} />
+          <aside className="relative w-72 max-w-[80vw] bg-white h-full shadow-sm z-10 flex flex-col">
             {content}
           </aside>
         </div>

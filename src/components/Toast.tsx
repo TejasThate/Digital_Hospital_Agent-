@@ -57,7 +57,7 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
         return (
           <div
             key={toast.id}
-            className={`pointer-events-auto flex items-start gap-3 p-3.5 rounded-xl border shadow-lg transition-all transform translate-y-0 animate-in fade-in slide-in-from-bottom-2 ${
+            className={`pointer-events-auto flex items-start gap-3 p-3.5 rounded-md border shadow-sm  transform translate-y-0 animate-in fade-in slide-in-from-bottom-2 ${
               isSuccess
                 ? 'bg-emerald-950/90 border-emerald-500/40 text-emerald-100'
                 : isError
@@ -75,13 +75,13 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
             </div>
 
             <div className="flex-1 text-xs space-y-0.5">
-              <p className="font-bold leading-tight">{toast.title}</p>
+              <p className="font-semibold leading-tight">{toast.title}</p>
               {toast.message && <p className="opacity-90 leading-normal">{toast.message}</p>}
             </div>
 
             <button
               onClick={() => handleDismiss(toast.id)}
-              className="p-1 hover:bg-white/10 rounded-lg transition-colors text-white/70 hover:text-white flex-shrink-0"
+              className="p-1 hover: rounded-lg transition-colors text-white/70 hover:text-white flex-shrink-0"
             >
               <X className="w-3.5 h-3.5" />
             </button>

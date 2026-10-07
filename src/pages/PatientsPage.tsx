@@ -98,15 +98,15 @@ export const PatientsPage: React.FC<PatientsPageProps> = ({ currentRole }) => {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Patients Record Directory</h1>
-          <p className="text-xs text-slate-500 font-semibold mt-0.5">
+          <h1 className="text-2xl font-semibold text-nhs-text tracking-tight">Patients Record Directory</h1>
+          <p className="text-xs text-nhs-muted font-semibold mt-0.5">
             Integrated NHS Digital Hospital Agent EPR — Live PostgreSQL Data
           </p>
         </div>
       </div>
 
       {/* Controls Bar: Search & Refresh */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-xs flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div className="bg-white rounded-lg border border-nhs-border p-4 shadow-sm flex flex-col sm:flex-row justify-between items-center gap-4">
         <div className="relative w-full sm:w-80">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
           <input
@@ -114,18 +114,18 @@ export const PatientsPage: React.FC<PatientsPageProps> = ({ currentRole }) => {
             value={search}
             onChange={handleSearchChange}
             placeholder="Search by patient name, ID (P-1001), or ward..."
-            className="w-full pl-9 pr-4 py-2 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-[#003087] focus:outline-none"
+            className="w-full pl-9 pr-4 py-2 border border-slate-300 rounded-md text-xs focus:ring-2 focus:ring-[#003087] focus:outline-none"
           />
         </div>
 
-        <div className="flex items-center gap-3 text-xs text-slate-500 font-semibold w-full sm:w-auto justify-between sm:justify-end">
+        <div className="flex items-center gap-3 text-xs text-nhs-muted font-semibold w-full sm:w-auto justify-between sm:justify-end">
           <span>
             Showing <strong>{patients.length}</strong> of <strong>{pagination.total}</strong> records
           </span>
           <button
             onClick={() => fetchPatientsList(pagination.page, search)}
             disabled={loading}
-            className="px-3.5 py-2 border border-slate-300 hover:bg-slate-50 rounded-xl font-bold text-slate-700 flex items-center gap-1.5 transition-colors disabled:opacity-50"
+            className="px-3.5 py-2 border border-slate-300 hover:bg-gray-50 rounded-md font-semibold text-slate-700 flex items-center gap-1.5 transition-colors disabled:opacity-50"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
             Refresh
@@ -137,10 +137,10 @@ export const PatientsPage: React.FC<PatientsPageProps> = ({ currentRole }) => {
       {loading ? (
         <TableSkeleton rows={6} />
       ) : (
-        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
+        <div className="bg-white rounded-lg border border-nhs-border shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 border-b border-slate-200/80 text-slate-500 uppercase tracking-wider font-bold text-[10px]">
+              <thead className="bg-gray-50 border-b border-nhs-border text-nhs-muted uppercase tracking-wider font-semibold text-[10px]">
                 <tr>
                   <th className="py-3.5 px-4">Patient</th>
                   <th className="py-3.5 px-4">Patient ID</th>
@@ -154,24 +154,24 @@ export const PatientsPage: React.FC<PatientsPageProps> = ({ currentRole }) => {
               </thead>
               <tbody className="divide-y divide-slate-100 text-slate-700 font-medium">
                 {patients.map((pt) => (
-                  <tr key={pt.id} className="hover:bg-slate-50/80 transition-colors">
-                    <td className="py-3.5 px-4 font-bold text-slate-900 flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-[#003087] text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">
+                  <tr key={pt.id} className="hover:bg-gray-50/80 transition-colors">
+                    <td className="py-3.5 px-4 font-semibold text-nhs-text flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-[#003087] text-white font-semibold flex items-center justify-center text-xs flex-shrink-0">
                         {pt.name ? pt.name.split(' ').map((n: string) => n[0]).join('') : 'PT'}
                       </div>
                       <div>
-                        <p className="font-bold text-slate-900 text-xs">{pt.name}</p>
+                        <p className="font-semibold text-nhs-text text-xs">{pt.name}</p>
                         <p className="text-[10px] text-slate-400 font-normal">{pt.email}</p>
                       </div>
                     </td>
-                    <td className="py-3.5 px-4 font-mono font-bold text-[#003087]">{pt.patientIdStr || `P-${pt.id}`}</td>
+                    <td className="py-3.5 px-4 font-mono font-semibold text-[#003087]">{pt.patientIdStr || `P-${pt.id}`}</td>
                     <td className="py-3.5 px-4">{pt.age} yrs / {pt.gender}</td>
-                    <td className="py-3.5 px-4 font-semibold text-slate-800">{pt.department || 'General Medicine'}</td>
+                    <td className="py-3.5 px-4 font-semibold text-nhs-text">{pt.department || 'General Medicine'}</td>
                     <td className="py-3.5 px-4">
                       {pt.nextAppointment ? (
                         <div>
-                          <p className="font-bold text-slate-900">{pt.nextAppointment.reason}</p>
-                          <p className="text-[10px] text-slate-500 font-medium">
+                          <p className="font-semibold text-nhs-text">{pt.nextAppointment.reason}</p>
+                          <p className="text-[10px] text-nhs-muted font-medium">
                             {pt.nextAppointment.date} {pt.nextAppointment.time}
                           </p>
                         </div>
@@ -190,7 +190,7 @@ export const PatientsPage: React.FC<PatientsPageProps> = ({ currentRole }) => {
                     <td className="py-3.5 px-4 text-right">
                       <button
                         onClick={() => handleOpenDetails(pt.id)}
-                        className="px-3 py-1.5 bg-[#003087] hover:bg-[#002060] text-white rounded-xl font-bold text-xs inline-flex items-center gap-1.5 transition-colors shadow-2xs"
+                        className="px-3 py-1.5 bg-[#003087] hover:bg-[#002060] text-white rounded-md font-semibold text-xs inline-flex items-center gap-1.5 transition-colors shadow-2xs"
                       >
                         <Eye className="w-3.5 h-3.5" />
                         View Record
@@ -203,22 +203,22 @@ export const PatientsPage: React.FC<PatientsPageProps> = ({ currentRole }) => {
           </div>
 
           {/* Pagination Footer */}
-          <div className="p-4 bg-slate-50 border-t border-slate-200/80 flex items-center justify-between">
-            <span className="text-xs text-slate-500 font-semibold">
+          <div className="p-4 bg-gray-50 border-t border-nhs-border flex items-center justify-between">
+            <span className="text-xs text-nhs-muted font-semibold">
               Page <strong>{pagination.page}</strong> of <strong>{pagination.totalPages}</strong>
             </span>
             <div className="flex items-center gap-2">
               <button
                 onClick={() => fetchPatientsList(pagination.page - 1, search)}
                 disabled={pagination.page <= 1 || loading}
-                className="px-3 py-1.5 border border-slate-300 rounded-xl text-xs font-bold text-slate-700 hover:bg-white disabled:opacity-40 transition-colors flex items-center gap-1"
+                className="px-3 py-1.5 border border-slate-300 rounded-md text-xs font-semibold text-slate-700 hover:bg-white disabled:opacity-40 transition-colors flex items-center gap-1"
               >
                 <ChevronLeft className="w-4 h-4" /> Previous
               </button>
               <button
                 onClick={() => fetchPatientsList(pagination.page + 1, search)}
                 disabled={pagination.page >= pagination.totalPages || loading}
-                className="px-3 py-1.5 border border-slate-300 rounded-xl text-xs font-bold text-slate-700 hover:bg-white disabled:opacity-40 transition-colors flex items-center gap-1"
+                className="px-3 py-1.5 border border-slate-300 rounded-md text-xs font-semibold text-slate-700 hover:bg-white disabled:opacity-40 transition-colors flex items-center gap-1"
               >
                 Next <ChevronRight className="w-4 h-4" />
               </button>

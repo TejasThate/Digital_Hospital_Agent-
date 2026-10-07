@@ -30,218 +30,173 @@ export const PatientDashboard: React.FC = () => {
   }, []);
 
   return (
-    <div className="max-w-[1220px] mx-auto space-y-5 px-2 sm:px-4">
-      {/* ROW 1: Greeting & AI Notice side-by-side */}
+    <div className="max-w-6xl mx-auto space-y-6 px-4 py-8">
+      {/* ROW 1: Greeting & Clinical Notice */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#0B1F3A] tracking-tight">Good morning, John</h1>
-          <p className="text-xs text-[#64748B] font-medium mt-0.5">Here is an overview of your care.</p>
+          <h1 className="text-2xl font-semibold text-nhs-text tracking-tight">Good morning, John</h1>
+          <p className="text-sm text-nhs-muted mt-0.5">Here is an overview of your care.</p>
         </div>
 
-        {/* AI Notice (Right-aligned compact clinical box) */}
-        <div className="bg-[#EEF6FF] border border-[#C6DFFF] rounded-[14px] p-3 max-w-md flex items-start gap-2.5 shadow-2xs">
-          <Info className="w-4 h-4 text-[#005EB8] flex-shrink-0 mt-0.5" />
-          <p className="text-xs text-[#0B1F3A] leading-snug font-medium">
-            <strong className="font-bold text-[#005EB8]">AI Notice:</strong> Our AI helps guide decision support, but is not a diagnosis. Always consult a healthcare professional for medical advice.
+        {/* Clinical Notice */}
+        <div className="bg-blue-50 border border-blue-200 rounded-md p-3 max-w-md flex items-start gap-2.5">
+          <Info className="w-4 h-4 text-nhs-blue flex-shrink-0 mt-0.5" />
+          <p className="text-xs text-nhs-text font-medium">
+            <strong className="font-semibold text-nhs-blue">Clinical Notice:</strong> Our system helps guide decision support, but is not a diagnosis. Always consult a healthcare professional for medical advice.
           </p>
         </div>
       </div>
 
-      {/* ROW 2: Primary Row (~68% Next Appointment / ~32% Recent Updates) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
-        
-        {/* Next Appointment Card (lg:col-span-8 = ~67%) */}
-        <div className="lg:col-span-8 bg-white rounded-[18px] border border-[#DFE8F2] p-5 shadow-[0_5px_18px_rgba(15,50,90,0.055)] flex flex-col justify-between space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-            <h2 className="font-extrabold text-[11px] uppercase tracking-wider text-[#64748B] flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-[#005EB8]" /> Next Appointment
-            </h2>
-            <span className="inline-flex items-center gap-1.5 px-3 py-0.5 bg-[#E6F4EA] text-[#137333] border border-[#CEEAD6] text-[11px] font-extrabold rounded-full">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#137333]"></span>
-              {nextApt?.status || 'CONFIRMED'}
-            </span>
-          </div>
-
-          {/* Inner Panel */}
-          <div className="bg-[#F5F9FD] rounded-[14px] border border-[#E4ECF4] p-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <div className="w-10 h-10 rounded-xl bg-[#005EB8] text-white flex items-center justify-center flex-shrink-0 font-bold shadow-xs">
-              <FileText className="w-5 h-5" />
-            </div>
-            <div className="space-y-1 flex-1">
-              <h3 className="font-bold text-[#0B1F3A] text-base">{nextApt?.reason || 'Follow-up Assessment'}</h3>
-              <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-[#64748B] pt-0.5">
-                <span className="flex items-center gap-1.5">
-                  <Calendar className="w-3.5 h-3.5 text-[#005EB8]" />
-                  {nextApt?.date || 'Today'}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5 text-[#005EB8]" />
-                  {nextApt?.time || '09:00 AM'}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-[#005EB8]" />
-                  {nextApt?.room || 'Room 3, North Wing'}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Actions */}
-          <div className="flex items-center gap-3 pt-0.5">
-            <button
-              onClick={() => setShowBookModal(true)}
-              className="px-4 py-2 bg-[#005EB8] hover:bg-[#004B93] text-white font-extrabold text-xs rounded-[10px] shadow-xs transition-all cursor-pointer"
-            >
-              Reschedule
-            </button>
-            <button
-              onClick={() => setShowDetails(!showDetails)}
-              className="px-4 py-2 bg-white hover:bg-slate-50 text-[#005EB8] border border-[#C8D8E8] font-bold text-xs rounded-[10px] transition-colors cursor-pointer"
-            >
-              {showDetails ? 'Hide Details' : 'View Details'}
-            </button>
-          </div>
-
-          {showDetails && (
-            <div className="p-3 bg-[#F5F9FD] rounded-[14px] border border-[#E4ECF4] text-xs text-[#0B1F3A] space-y-1">
-              <p><strong>Attending Clinician:</strong> {nextApt?.doctorName || 'Dr. Sarah Jenkins'} (Consultant Cardiologist)</p>
-              <p><strong>Clinical Prep:</strong> Fast for 2 hours prior to the assessment.</p>
-              <p className="font-mono text-[11px] text-[#64748B]">EPR Reference: {nextApt?.id || 'APT-904218'}</p>
-            </div>
-          )}
+      {/* ROW 2: Dominant Next Appointment Card */}
+      <div className="bg-white rounded-lg border-t-4 border-t-nhs-blue border-x border-b border-nhs-border p-6 shadow-sm flex flex-col space-y-4">
+        <div className="flex items-center justify-between border-b border-gray-100 pb-3">
+          <h2 className="font-semibold text-sm text-nhs-text flex items-center gap-2">
+            <Calendar className="w-5 h-5 text-nhs-blue" /> Next Appointment
+          </h2>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-50 text-green-800 border border-green-200 text-xs font-semibold rounded-md">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-600"></span>
+            {nextApt?.status || 'CONFIRMED'}
+          </span>
         </div>
 
-        {/* Recent Updates Card (lg:col-span-4 = ~33%) */}
-        <div className="lg:col-span-4 bg-white rounded-[18px] border border-[#DFE8F2] p-5 shadow-[0_5px_18px_rgba(15,50,90,0.055)] flex flex-col justify-between space-y-3.5">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-            <h2 className="font-extrabold text-[11px] uppercase tracking-wider text-[#64748B]">Recent Updates</h2>
+        {/* Inner Panel */}
+        <div className="bg-gray-50 rounded-md border border-gray-200 p-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div className="w-12 h-12 rounded-md bg-nhs-blue text-white flex items-center justify-center flex-shrink-0">
+            <FileText className="w-6 h-6" />
           </div>
-
-          <div className="space-y-3 text-xs divide-y divide-slate-100">
-            {/* Item 1 */}
-            <div className="pt-0.5">
-              <div className="flex items-start gap-2.5">
-                <span className="w-2 h-2 rounded-full bg-[#005EB8] mt-1 flex-shrink-0"></span>
-                <div className="space-y-0.5">
-                  <h4 className="font-bold text-[#0B1F3A] text-xs">Your test results are ready</h4>
-                  <p className="text-[#64748B] text-[11px] leading-snug">Blood panel from 12 Oct is now available to view.</p>
-                  <span className="text-[10px] text-slate-400 font-mono block">2 hours ago</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Item 2 */}
-            <div className="pt-3">
-              <div className="flex items-start gap-2.5">
-                <span className="w-2 h-2 rounded-full bg-slate-300 mt-1 flex-shrink-0"></span>
-                <div className="space-y-0.5">
-                  <h4 className="font-bold text-[#0B1F3A] text-xs">Prescription ready for collection</h4>
-                  <p className="text-[#64748B] text-[11px] leading-snug">Lisinopril 10mg is ready at Pharmacy Direct.</p>
-                  <span className="text-[10px] text-slate-400 font-mono block">Yesterday</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Item 3 */}
-            <div className="pt-3">
-              <div className="flex items-start gap-2.5">
-                <span className="w-2 h-2 rounded-full bg-slate-300 mt-1 flex-shrink-0"></span>
-                <div className="space-y-0.5">
-                  <h4 className="font-bold text-[#0B1F3A] text-xs">Pre-appointment questionnaire</h4>
-                  <p className="text-[#64748B] text-[11px] leading-snug">Please complete before your cardiology consult.</p>
-                  <span className="text-[10px] text-slate-400 font-mono block">3 days ago</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      {/* ROW 3: Secondary Row (~50% Health Overview / ~50% Triage Status) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        
-        {/* Health Overview */}
-        <div className="bg-white rounded-[18px] border border-[#DFE8F2] p-5 shadow-[0_5px_18px_rgba(15,50,90,0.055)] space-y-3">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
-            <span className="font-extrabold text-xs text-[#0B1F3A] flex items-center gap-1.5">
-              <Activity className="w-4 h-4 text-[#005EB8]" /> Health Overview
-            </span>
-            <span className="text-[10px] font-extrabold text-[#005EB8] bg-[#EEF6FF] border border-[#C6DFFF] px-2 py-0.5 rounded-full uppercase">
-              Latest Vitals
-            </span>
-          </div>
-          <div className="grid grid-cols-2 gap-3 text-xs pt-0.5">
-            <div className="p-3.5 bg-[#F5F9FD] rounded-[14px] border border-[#E4ECF4] h-[75px] flex flex-col justify-center space-y-1">
-              <span className="text-[10px] font-extrabold text-[#64748B] uppercase tracking-wider block">Heart Rate</span>
-              <span className="font-bold text-[#0B1F3A] text-lg flex items-center gap-1.5">
-                <Heart className="w-4 h-4 text-[#005EB8]" /> 72 bpm
+          <div className="space-y-1 flex-1">
+            <h3 className="font-semibold text-nhs-text text-lg">{nextApt?.reason || 'Follow-up Assessment'}</h3>
+            <div className="flex flex-wrap items-center gap-4 text-sm text-nhs-muted">
+              <span className="flex items-center gap-1.5">
+                <Calendar className="w-4 h-4 text-nhs-blue" />
+                {nextApt?.date || 'Today'}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Clock className="w-4 h-4 text-nhs-blue" />
+                {nextApt?.time || '09:00 AM'}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <MapPin className="w-4 h-4 text-nhs-blue" />
+                {nextApt?.room || 'Room 3, North Wing'}
               </span>
             </div>
-            <div className="p-3.5 bg-[#F5F9FD] rounded-[14px] border border-[#E4ECF4] h-[75px] flex flex-col justify-center space-y-1">
-              <span className="text-[10px] font-extrabold text-[#64748B] uppercase tracking-wider block">SpO2</span>
-              <span className="font-bold text-[#0B1F3A] text-lg flex items-center gap-1.5">
-                <Thermometer className="w-4 h-4 text-[#005EB8]" /> 98 %
+          </div>
+        </div>
+
+        {/* Actions */}
+        <div className="flex items-center gap-3 pt-2">
+          <button
+            onClick={() => setShowBookModal(true)}
+            className="px-4 py-2 bg-nhs-blue hover:bg-nhs-dark text-white font-medium text-sm rounded-md transition-colors"
+          >
+            Reschedule
+          </button>
+          <button
+            onClick={() => setShowDetails(!showDetails)}
+            className="px-4 py-2 bg-white hover:bg-gray-50 text-nhs-blue border border-nhs-border font-medium text-sm rounded-md transition-colors"
+          >
+            {showDetails ? 'Hide Details' : 'View Details'}
+          </button>
+        </div>
+
+        {showDetails && (
+          <div className="p-4 bg-gray-50 rounded-md border border-gray-200 text-sm text-nhs-text space-y-2 mt-2">
+            <p><strong className="font-semibold">Attending Clinician:</strong> {nextApt?.doctorName || 'Dr. Sarah Jenkins'} (Consultant Cardiologist)</p>
+            <p><strong className="font-semibold">Clinical Prep:</strong> Fast for 2 hours prior to the assessment.</p>
+            <p className="font-mono text-xs text-nhs-muted pt-1">EPR Reference: {nextApt?.id || 'APT-904218'}</p>
+          </div>
+        )}
+      </div>
+
+      {/* ROW 3: Secondary Information (3 columns) */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        {/* Recent Updates */}
+        <div className="bg-white rounded-lg border border-nhs-border p-5 space-y-4">
+          <h2 className="font-semibold text-sm text-nhs-text border-b border-gray-100 pb-2">Recent Updates</h2>
+          <div className="space-y-4 text-sm">
+            <div className="flex items-start gap-3">
+              <span className="w-2 h-2 rounded-full bg-nhs-blue mt-1.5 flex-shrink-0"></span>
+              <div>
+                <h4 className="font-semibold text-nhs-text">Your test results are ready</h4>
+                <p className="text-nhs-muted mt-0.5">Blood panel from 12 Oct is now available to view.</p>
+                <span className="text-xs text-nhs-muted font-medium block mt-1">2 hours ago</span>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="w-2 h-2 rounded-full bg-gray-300 mt-1.5 flex-shrink-0"></span>
+              <div>
+                <h4 className="font-semibold text-nhs-text">Prescription ready</h4>
+                <p className="text-nhs-muted mt-0.5">Lisinopril 10mg is ready at Pharmacy Direct.</p>
+                <span className="text-xs text-nhs-muted font-medium block mt-1">Yesterday</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Health Overview */}
+        <div className="bg-white rounded-lg border border-nhs-border p-5 space-y-4">
+          <div className="flex items-center justify-between border-b border-gray-100 pb-2">
+            <span className="font-semibold text-sm text-nhs-text flex items-center gap-1.5">
+              <Activity className="w-4 h-4 text-nhs-blue" /> Health Overview
+            </span>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="p-3 bg-gray-50 rounded-md border border-gray-200">
+              <span className="text-xs font-medium text-nhs-muted block">Heart Rate</span>
+              <span className="font-semibold text-nhs-text text-lg flex items-center gap-1 mt-1">
+                <Heart className="w-4 h-4 text-nhs-blue" /> 72 bpm
+              </span>
+            </div>
+            <div className="p-3 bg-gray-50 rounded-md border border-gray-200">
+              <span className="text-xs font-medium text-nhs-muted block">SpO2</span>
+              <span className="font-semibold text-nhs-text text-lg flex items-center gap-1 mt-1">
+                <Thermometer className="w-4 h-4 text-nhs-blue" /> 98%
               </span>
             </div>
           </div>
         </div>
 
         {/* Triage Status */}
-        <div className="bg-white rounded-[18px] border border-[#DFE8F2] p-5 shadow-[0_5px_18px_rgba(15,50,90,0.055)] space-y-3">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
-            <span className="font-extrabold text-xs text-[#0B1F3A] flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-[#005EB8]" /> Triage Status
+        <div className="bg-white rounded-lg border border-nhs-border p-5 space-y-4">
+          <div className="flex items-center justify-between border-b border-gray-100 pb-2">
+            <span className="font-semibold text-sm text-nhs-text flex items-center gap-1.5">
+              <ShieldCheck className="w-4 h-4 text-nhs-blue" /> Triage Status
             </span>
-            <span className="bg-[#EEF6FF] text-[#005EB8] border border-[#C6DFFF] font-extrabold text-[11px] px-3 py-0.5 rounded-full">
+            <span className="bg-blue-50 text-blue-800 border border-blue-200 font-medium text-xs px-2 py-0.5 rounded-md">
               STANDARD
             </span>
           </div>
-          <div className="p-3.5 bg-[#F5F9FD] rounded-[14px] border border-[#E4ECF4] space-y-1">
-            <p className="font-bold text-[#0B1F3A] text-sm">Routine Assessment</p>
-            <p className="text-xs text-slate-500 font-medium">No urgent symptoms detected in recent check.</p>
+          <div className="p-3 bg-gray-50 rounded-md border border-gray-200">
+            <p className="font-semibold text-nhs-text text-sm">Routine Assessment</p>
+            <p className="text-sm text-nhs-muted mt-1">No urgent symptoms detected in recent check.</p>
           </div>
         </div>
       </div>
 
-      {/* ROW 4: Quick Actions Cards (3 Equal-width 33% Interactive Cards) */}
-      <div className="space-y-2.5">
-        <h2 className="font-extrabold text-[11px] uppercase tracking-wider text-[#64748B]">Quick Actions</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-          
-          {/* Action 1: Book Appointment */}
+      {/* ROW 4: Quick Actions */}
+      <div className="bg-white rounded-lg border border-nhs-border p-5 space-y-4">
+        <h2 className="font-semibold text-sm text-nhs-text">Quick Actions</h2>
+        <div className="flex flex-wrap gap-3">
           <button
             onClick={() => setShowBookModal(true)}
-            className="bg-white rounded-[18px] border border-[#DCE8F4] p-4 h-[110px] flex flex-col items-center justify-center gap-2 hover:border-[#005EB8] hover:shadow-md hover:-translate-y-0.5 transition-all group text-center cursor-pointer shadow-[0_5px_16px_rgba(15,60,100,0.045)]"
+            className="px-4 py-2 bg-nhs-blue hover:bg-nhs-dark text-white font-medium text-sm rounded-md flex items-center gap-2 transition-colors"
           >
-            <div className="w-10 h-10 rounded-[12px] bg-[#EDF5FF] text-[#005EB8] flex items-center justify-center group-hover:scale-110 transition-transform shadow-xs">
-              <Calendar className="w-5 h-5" />
-            </div>
-            <span className="font-bold text-xs text-[#0B1F3A]">Book Appointment</span>
+            <Calendar className="w-4 h-4" /> Book Appointment
           </button>
-
-          {/* Action 2: Start Symptom Triage */}
           <button
             onClick={() => setShowTriageModal(true)}
-            className="bg-white rounded-[18px] border border-[#DCE8F4] p-4 h-[110px] flex flex-col items-center justify-center gap-2 hover:border-sky-500 hover:shadow-md hover:-translate-y-0.5 transition-all group text-center cursor-pointer shadow-[0_5px_16px_rgba(15,60,100,0.045)]"
+            className="px-4 py-2 bg-white hover:bg-gray-50 text-nhs-text border border-nhs-border font-medium text-sm rounded-md flex items-center gap-2 transition-colors"
           >
-            <div className="w-10 h-10 rounded-[12px] bg-sky-50 text-sky-600 flex items-center justify-center group-hover:scale-110 transition-transform shadow-xs">
-              <Stethoscope className="w-5 h-5" />
-            </div>
-            <span className="font-bold text-xs text-[#0B1F3A]">Start Symptom Triage</span>
+            <Stethoscope className="w-4 h-4 text-nhs-blue" /> Start Symptom Triage
           </button>
-
-          {/* Action 3: Ask Assistant */}
           <button
             onClick={() => {
               window.dispatchEvent(new CustomEvent('open-ask-assistant'));
             }}
-            className="bg-white rounded-[18px] border border-[#DCE8F4] p-4 h-[110px] flex flex-col items-center justify-center gap-2 hover:border-indigo-500 hover:shadow-md hover:-translate-y-0.5 transition-all group text-center cursor-pointer shadow-[0_5px_16px_rgba(15,60,100,0.045)]"
+            className="px-4 py-2 bg-white hover:bg-gray-50 text-nhs-text border border-nhs-border font-medium text-sm rounded-md flex items-center gap-2 transition-colors"
           >
-            <div className="w-10 h-10 rounded-[12px] bg-indigo-50 text-indigo-600 flex items-center justify-center group-hover:scale-110 transition-transform shadow-xs">
-              <Bot className="w-5 h-5" />
-            </div>
-            <span className="font-bold text-xs text-[#0B1F3A]">Ask Assistant</span>
+            <Bot className="w-4 h-4 text-nhs-blue" /> Ask Assistant
           </button>
         </div>
       </div>

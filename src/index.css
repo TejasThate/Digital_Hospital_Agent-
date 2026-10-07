@@ -3,27 +3,16 @@
 @tailwind utilities;
 
 :root {
-  font-family: 'Public Sans', system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   color-scheme: light;
-
-  /* NHS Premium Blue Color System */
-  --primary-blue: #005EB8;
-  --primary-blue-dark: #003087;
-  --primary-blue-light: #EEF6FF;
-  --navy: #0B1F3A;
-  --background: #F3F6FA;
-  --card: #FFFFFF;
-  --border: #DFE8F2;
-  --text-primary: #0B1F3A;
-  --text-secondary: #64748B;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #F3F6FA;
-  color: #0B1F3A;
-  font-family: 'Public Sans', sans-serif;
+  background-color: #F0F4F5;
+  color: #212B32;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 

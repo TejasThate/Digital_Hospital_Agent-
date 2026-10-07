@@ -39,7 +39,7 @@ export async function askAIAssistant(message: string, role: string) {
 
   return `Thank you for your inquiry regarding: "${message}".
 
-As your NHS AI Assistant, I can provide evidence-based decision support and guidance. For acute clinical emergencies, please escalate immediately or call 999.`;
+As your NHS Digital Assistant, I can provide evidence-based decision support and guidance. For acute clinical emergencies, please escalate immediately or call 999.`;
 }
 
 export interface TriageInputPayload {

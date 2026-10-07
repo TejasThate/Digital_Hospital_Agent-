@@ -320,7 +320,7 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
         );
       default:
         return (
-          <span className="px-2.5 py-1 bg-gray-100 text-gray-700 border border-gray-200 text-xs font-semibold rounded-full">
+          <span className="px-2.5 py-1 bg-gray-100 text-nhs-muted border border-nhs-border text-xs font-semibold rounded-full">
             {status}
           </span>
         );
@@ -333,14 +333,14 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold text-gray-900">Hospital Facilities & Services</h1>
+            <h1 className="text-2xl font-semibold text-nhs-text">Hospital Facilities & Services</h1>
             {currentRole.toLowerCase() === 'admin' && (
-              <span className="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs font-bold rounded-md uppercase">
+              <span className="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs font-semibold rounded-md uppercase">
                 Admin Management Mode
               </span>
             )}
           </div>
-          <p className="text-xs text-gray-500 font-medium mt-0.5">
+          <p className="text-xs text-nhs-muted font-medium mt-0.5">
             NHS Digital Hospital Directory & Clinical Services • Live PostgreSQL Synchronization
           </p>
         </div>
@@ -348,17 +348,17 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
         {/* Dynamic Backend Health Indicator (Requirement 16) */}
         <div className="flex items-center gap-3">
           {healthStatus.checking ? (
-            <span className="px-3 py-1.5 bg-gray-100 text-gray-600 border border-gray-200 text-xs font-semibold rounded-full flex items-center gap-1.5">
+            <span className="px-3 py-1.5 bg-gray-100 text-nhs-muted border border-nhs-border text-xs font-semibold rounded-full flex items-center gap-1.5">
               <Loader2 className="w-3.5 h-3.5 animate-spin" /> Checking Health...
             </span>
           ) : healthStatus.connected ? (
-            <span className="px-3 py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold rounded-full flex items-center gap-1.5 shadow-xs">
+            <span className="px-3 py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold rounded-full flex items-center gap-1.5 shadow-sm">
               <Activity className="w-3.5 h-3.5" /> Live Backend Connected
             </span>
           ) : (
             <button
               onClick={checkHealth}
-              className="px-3 py-1.5 bg-rose-50 text-rose-700 border border-rose-200 text-xs font-bold rounded-full flex items-center gap-1.5 hover:bg-rose-100 transition-colors"
+              className="px-3 py-1.5 bg-rose-50 text-rose-700 border border-rose-200 text-xs font-semibold rounded-full flex items-center gap-1.5 hover:bg-rose-100 transition-colors"
             >
               <AlertCircle className="w-3.5 h-3.5" /> Backend Disconnected • Retry
             </button>
@@ -368,13 +368,13 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
             <div className="flex items-center gap-2">
               <button
                 onClick={() => openAdminForm('create', 'facility')}
-                className="px-3.5 py-1.5 bg-[#003087] hover:bg-[#002060] text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-sm transition-colors"
+                className="px-3.5 py-1.5 bg-[#003087] hover:bg-[#002060] text-white text-xs font-semibold rounded-lg flex items-center gap-1.5 shadow-sm transition-colors"
               >
                 <Plus className="w-4 h-4" /> Add Facility
               </button>
               <button
                 onClick={() => openAdminForm('create', 'service')}
-                className="px-3.5 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold rounded-lg flex items-center gap-1.5 shadow-sm transition-colors"
+                className="px-3.5 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold rounded-lg flex items-center gap-1.5 shadow-sm transition-colors"
               >
                 <Plus className="w-4 h-4" /> Add Service
               </button>
@@ -384,36 +384,36 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
       </div>
 
       {/* Filter & Search Bar */}
-      <div className="bg-white rounded-2xl border border-gray-200 p-4 shadow-xs space-y-4">
+      <div className="bg-white rounded-lg border border-nhs-border p-4 shadow-sm space-y-4">
         <div className="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
           {/* Tab Selection */}
-          <div className="flex bg-gray-100 p-1 rounded-xl gap-1">
+          <div className="flex bg-gray-100 p-1 rounded-md gap-1">
             <button
               onClick={() => { setActiveTab('facilities'); setPage(1); }}
-              className={`px-4 py-2 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 ${
+              className={`px-4 py-2 text-xs font-semibold rounded-lg  flex items-center gap-1.5 ${
                 activeTab === 'facilities'
-                  ? 'bg-white text-[#003087] shadow-xs'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-white text-[#003087] shadow-sm'
+                  : 'text-nhs-muted hover:text-nhs-text'
               }`}
             >
               <Building2 className="w-4 h-4" /> Facilities
             </button>
             <button
               onClick={() => { setActiveTab('services'); setPage(1); }}
-              className={`px-4 py-2 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 ${
+              className={`px-4 py-2 text-xs font-semibold rounded-lg  flex items-center gap-1.5 ${
                 activeTab === 'services'
-                  ? 'bg-white text-[#003087] shadow-xs'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-white text-[#003087] shadow-sm'
+                  : 'text-nhs-muted hover:text-nhs-text'
               }`}
             >
               <Stethoscope className="w-4 h-4" /> Services
             </button>
             <button
               onClick={() => { setActiveTab('all'); setPage(1); }}
-              className={`px-4 py-2 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 ${
+              className={`px-4 py-2 text-xs font-semibold rounded-lg  flex items-center gap-1.5 ${
                 activeTab === 'all'
-                  ? 'bg-white text-[#003087] shadow-xs'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-white text-[#003087] shadow-sm'
+                  : 'text-nhs-muted hover:text-nhs-text'
               }`}
             >
               <Filter className="w-4 h-4" /> All Combined
@@ -428,12 +428,12 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
               placeholder="Search facilities, services, locations, departments..."
               value={searchQuery}
               onChange={(e) => { setSearchQuery(e.target.value); setPage(1); }}
-              className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#003087]/20 focus:border-[#003087] transition-all"
+              className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-nhs-border rounded-md text-xs text-nhs-text focus:outline-none focus:ring-2 focus:ring-[#003087]/20 focus:border-[#003087] "
             />
             {searchQuery && (
               <button
                 onClick={() => { setSearchQuery(''); setPage(1); }}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-nhs-muted"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -448,10 +448,10 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
           </span>
           <button
             onClick={() => { setSelectedCategory('ALL'); setPage(1); }}
-            className={`px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap transition-colors ${
+            className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-colors ${
               selectedCategory === 'ALL'
                 ? 'bg-[#003087] text-white'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                : 'bg-gray-100 text-nhs-muted hover:bg-gray-200'
             }`}
           >
             All Categories
@@ -462,8 +462,8 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
               onClick={() => { setSelectedCategory(cat); setPage(1); }}
               className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-colors ${
                 selectedCategory.toLowerCase() === cat.toLowerCase()
-                  ? 'bg-[#003087] text-white font-bold'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  ? 'bg-[#003087] text-white font-semibold'
+                  : 'bg-gray-100 text-nhs-muted hover:bg-gray-200'
               }`}
             >
               {cat}
@@ -477,25 +477,25 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
         /* Loading Skeleton (Requirement 17) */
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[1, 2, 3, 4, 5, 6].map((idx) => (
-            <div key={idx} className="bg-white rounded-2xl border border-gray-200 p-6 space-y-4 animate-pulse">
+            <div key={idx} className="bg-white rounded-lg border border-nhs-border p-6 space-y-4 animate-pulse">
               <div className="h-4 bg-gray-200 rounded-md w-3/4"></div>
               <div className="h-3 bg-gray-100 rounded-md w-1/2"></div>
-              <div className="h-12 bg-gray-50 rounded-xl"></div>
+              <div className="h-12 bg-gray-50 rounded-md"></div>
               <div className="h-8 bg-gray-100 rounded-lg w-full"></div>
             </div>
           ))}
         </div>
       ) : error ? (
         /* Error State (Requirement 19) */
-        <div className="bg-rose-50 rounded-2xl border border-rose-200 p-8 text-center space-y-3">
+        <div className="bg-rose-50 rounded-lg border border-rose-200 p-8 text-center space-y-3">
           <AlertCircle className="w-10 h-10 text-rose-600 mx-auto" />
-          <h3 className="font-bold text-rose-900 text-base">{error}</h3>
+          <h3 className="font-semibold text-rose-900 text-base">{error}</h3>
           <p className="text-xs text-rose-700 max-w-md mx-auto">
             Failed to fetch facilities or services from PostgreSQL. Please ensure the backend server is running.
           </p>
           <button
             onClick={fetchData}
-            className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded-xl inline-flex items-center gap-1.5 transition-colors"
+            className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold rounded-md inline-flex items-center gap-1.5 transition-colors"
           >
             <RefreshCw className="w-3.5 h-3.5" /> Retry Action
           </button>
@@ -504,16 +504,16 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
         (activeTab === 'services' && services.length === 0) ||
         (activeTab === 'all' && facilities.length === 0 && services.length === 0) ? (
         /* Empty State (Requirement 18) */
-        <div className="bg-white rounded-2xl border border-gray-200 p-12 text-center space-y-3">
+        <div className="bg-white rounded-lg border border-nhs-border p-12 text-center space-y-3">
           <Building2 className="w-12 h-12 text-gray-300 mx-auto" />
-          <h3 className="font-bold text-gray-800 text-base">No facilities or services available.</h3>
-          <p className="text-xs text-gray-500 max-w-md mx-auto">
+          <h3 className="font-semibold text-nhs-text text-base">No facilities or services available.</h3>
+          <p className="text-xs text-nhs-muted max-w-md mx-auto">
             No database records match your active search filter "{searchQuery}" or selected category "{selectedCategory}".
           </p>
           {(searchQuery || selectedCategory !== 'ALL') && (
             <button
               onClick={() => { setSearchQuery(''); setSelectedCategory('ALL'); }}
-              className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold rounded-xl transition-colors"
+              className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-nhs-text text-xs font-semibold rounded-md transition-colors"
             >
               Clear Filters
             </button>
@@ -525,7 +525,7 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
           {(activeTab === 'facilities' || activeTab === 'all') && facilities.length > 0 && (
             <div className="space-y-4">
               {activeTab === 'all' && (
-                <h2 className="text-base font-bold text-gray-900 flex items-center gap-2">
+                <h2 className="text-base font-semibold text-nhs-text flex items-center gap-2">
                   <Building2 className="w-4 h-4 text-[#003087]" /> Hospital Facilities ({facilities.length})
                 </h2>
               )}
@@ -533,7 +533,7 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
                 {facilities.map((fac) => (
                   <div
                     key={`fac-${fac.id}`}
-                    className="bg-white rounded-2xl border border-gray-200 p-6 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between space-y-4"
+                    className="bg-white rounded-lg border border-nhs-border p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between space-y-4"
                   >
                     <div className="space-y-3">
                       <div className="flex items-start justify-between gap-2">
@@ -541,7 +541,7 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
                           <span className="px-2.5 py-0.5 bg-blue-50 text-[#003087] font-semibold text-[11px] rounded-md uppercase tracking-wider">
                             {fac.category}
                           </span>
-                          <h3 className="font-bold text-gray-900 text-base mt-1.5 leading-snug">
+                          <h3 className="font-semibold text-nhs-text text-base mt-1.5 leading-snug">
                             {fac.name}
                           </h3>
                         </div>
@@ -549,22 +549,22 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
                       </div>
 
                       {fac.description && (
-                        <p className="text-xs text-gray-600 line-clamp-2 leading-relaxed">
+                        <p className="text-xs text-nhs-muted line-clamp-2 leading-relaxed">
                           {fac.description}
                         </p>
                       )}
 
-                      <div className="space-y-2 pt-2 border-t border-gray-100 text-xs text-gray-600">
+                      <div className="space-y-2 pt-2 border-t border-nhs-border text-xs text-nhs-muted">
                         <div className="flex items-center gap-2">
                           <MapPin className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                          <span className="font-medium text-gray-900">{fac.location}</span>
+                          <span className="font-medium text-nhs-text">{fac.location}</span>
                           {fac.floor && <span className="text-gray-400">({fac.floor})</span>}
                         </div>
 
                         <div className="flex items-center gap-2">
                           <Clock className="w-3.5 h-3.5 text-gray-400 shrink-0" />
                           {/* Real Opening Hours (Requirement 9) */}
-                          <span className="font-medium text-gray-700">{fac.openingHours}</span>
+                          <span className="font-medium text-nhs-muted">{fac.openingHours}</span>
                         </div>
 
                         {fac.contactPhone && (
@@ -582,10 +582,10 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
                       </div>
                     </div>
 
-                    <div className="pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
+                    <div className="pt-3 border-t border-nhs-border flex items-center justify-between gap-2">
                       <button
                         onClick={() => setSelectedDetail({ type: 'facility', data: fac })}
-                        className="px-3.5 py-1.5 bg-gray-100 hover:bg-[#003087] hover:text-white text-gray-800 text-xs font-bold rounded-xl flex items-center gap-1.5 transition-colors"
+                        className="px-3.5 py-1.5 bg-gray-100 hover:bg-[#003087] hover:text-white text-nhs-text text-xs font-semibold rounded-md flex items-center gap-1.5 transition-colors"
                       >
                         <Info className="w-3.5 h-3.5" /> View Details
                       </button>
@@ -594,14 +594,14 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
                         <div className="flex items-center gap-1">
                           <button
                             onClick={() => openAdminForm('edit', 'facility', fac)}
-                            className="p-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
+                            className="p-1.5 bg-gray-100 hover:bg-gray-200 text-nhs-muted rounded-lg transition-colors"
                             title="Edit Facility"
                           >
                             <Edit className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={() => handleToggleStatus(fac, 'facility')}
-                            className="px-2 py-1 bg-amber-100 hover:bg-amber-200 text-amber-800 text-[11px] font-bold rounded-lg transition-colors"
+                            className="px-2 py-1 bg-amber-100 hover:bg-amber-200 text-amber-800 text-[11px] font-semibold rounded-lg transition-colors"
                             title="Toggle Status"
                           >
                             Toggle Status
@@ -618,7 +618,7 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
           {(activeTab === 'services' || activeTab === 'all') && services.length > 0 && (
             <div className="space-y-4">
               {activeTab === 'all' && (
-                <h2 className="text-base font-bold text-gray-900 flex items-center gap-2">
+                <h2 className="text-base font-semibold text-nhs-text flex items-center gap-2">
                   <Stethoscope className="w-4 h-4 text-emerald-700" /> Clinical Services ({services.length})
                 </h2>
               )}
@@ -626,7 +626,7 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
                 {services.map((serv) => (
                   <div
                     key={`serv-${serv.id}`}
-                    className="bg-white rounded-2xl border border-gray-200 p-6 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between space-y-4"
+                    className="bg-white rounded-lg border border-nhs-border p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between space-y-4"
                   >
                     <div className="space-y-3">
                       <div className="flex items-start justify-between gap-2">
@@ -634,7 +634,7 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
                           <span className="px-2.5 py-0.5 bg-emerald-50 text-emerald-800 font-semibold text-[11px] rounded-md uppercase tracking-wider">
                             {serv.category}
                           </span>
-                          <h3 className="font-bold text-gray-900 text-base mt-1.5 leading-snug">
+                          <h3 className="font-semibold text-nhs-text text-base mt-1.5 leading-snug">
                             {serv.name}
                           </h3>
                         </div>
@@ -642,16 +642,16 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
                       </div>
 
                       {serv.description && (
-                        <p className="text-xs text-gray-600 line-clamp-2 leading-relaxed">
+                        <p className="text-xs text-nhs-muted line-clamp-2 leading-relaxed">
                           {serv.description}
                         </p>
                       )}
 
-                      <div className="space-y-2 pt-2 border-t border-gray-100 text-xs text-gray-600">
+                      <div className="space-y-2 pt-2 border-t border-nhs-border text-xs text-nhs-muted">
                         {serv.facilityName && (
                           <div className="flex items-center gap-2">
                             <Building2 className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                            <span className="font-semibold text-gray-900">{serv.facilityName}</span>
+                            <span className="font-semibold text-nhs-text">{serv.facilityName}</span>
                           </div>
                         )}
 
@@ -662,15 +662,15 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
 
                         <div className="flex items-center gap-2">
                           <Clock className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                          <span className="font-medium text-gray-700">{serv.openingHours}</span>
+                          <span className="font-medium text-nhs-muted">{serv.openingHours}</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
+                    <div className="pt-3 border-t border-nhs-border flex items-center justify-between gap-2">
                       <button
                         onClick={() => setSelectedDetail({ type: 'service', data: serv })}
-                        className="px-3.5 py-1.5 bg-gray-100 hover:bg-emerald-700 hover:text-white text-gray-800 text-xs font-bold rounded-xl flex items-center gap-1.5 transition-colors"
+                        className="px-3.5 py-1.5 bg-gray-100 hover:bg-emerald-700 hover:text-white text-nhs-text text-xs font-semibold rounded-md flex items-center gap-1.5 transition-colors"
                       >
                         <Info className="w-3.5 h-3.5" /> View Details
                       </button>
@@ -679,14 +679,14 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
                         <div className="flex items-center gap-1">
                           <button
                             onClick={() => openAdminForm('edit', 'service', serv)}
-                            className="p-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
+                            className="p-1.5 bg-gray-100 hover:bg-gray-200 text-nhs-muted rounded-lg transition-colors"
                             title="Edit Service"
                           >
                             <Edit className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={() => handleToggleStatus(serv, 'service')}
-                            className="px-2 py-1 bg-amber-100 hover:bg-amber-200 text-amber-800 text-[11px] font-bold rounded-lg transition-colors"
+                            className="px-2 py-1 bg-amber-100 hover:bg-amber-200 text-amber-800 text-[11px] font-semibold rounded-lg transition-colors"
                             title="Toggle Status"
                           >
                             Toggle Status
@@ -702,23 +702,23 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
 
           {/* Pagination Controls (Requirement 20) */}
           {totalPages > 1 && (
-            <div className="flex items-center justify-between border-t border-gray-200 pt-4 text-xs">
-              <span className="text-gray-500">
-                Showing Page <span className="font-bold text-gray-900">{page}</span> of{' '}
-                <span className="font-bold text-gray-900">{totalPages}</span> ({totalCount} total items)
+            <div className="flex items-center justify-between border-t border-nhs-border pt-4 text-xs">
+              <span className="text-nhs-muted">
+                Showing Page <span className="font-semibold text-nhs-text">{page}</span> of{' '}
+                <span className="font-semibold text-nhs-text">{totalPages}</span> ({totalCount} total items)
               </span>
               <div className="flex items-center gap-2">
                 <button
                   disabled={page <= 1}
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 disabled:opacity-50 flex items-center gap-1"
+                  className="px-3 py-1.5 bg-white border border-nhs-border rounded-lg font-semibold text-nhs-muted hover:bg-gray-50 disabled:opacity-50 flex items-center gap-1"
                 >
                   <ChevronLeft className="w-4 h-4" /> Previous
                 </button>
                 <button
                   disabled={page >= totalPages}
                   onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                  className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 disabled:opacity-50 flex items-center gap-1"
+                  className="px-3 py-1.5 bg-white border border-nhs-border rounded-lg font-semibold text-nhs-muted hover:bg-gray-50 disabled:opacity-50 flex items-center gap-1"
                 >
                   Next <ChevronRight className="w-4 h-4" />
                 </button>
@@ -730,78 +730,78 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
 
       {/* Facility/Service Detail Modal (Requirement 11) */}
       {selectedDetail && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl border border-gray-200 max-w-lg w-full p-6 space-y-5 shadow-2xl animate-in fade-in zoom-in-95">
-            <div className="flex items-start justify-between gap-3 border-b border-gray-100 pb-4">
+        <div className="fixed inset-0 z-50 bg-black/50  flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg border border-nhs-border max-w-lg w-full p-6 space-y-5 shadow-sm animate-in fade-in zoom-in-95">
+            <div className="flex items-start justify-between gap-3 border-b border-nhs-border pb-4">
               <div>
                 <span className="px-2.5 py-0.5 bg-blue-50 text-[#003087] font-semibold text-[11px] rounded-md uppercase">
                   {selectedDetail.data.category}
                 </span>
-                <h3 className="text-lg font-bold text-gray-900 mt-1">
+                <h3 className="text-lg font-semibold text-nhs-text mt-1">
                   {selectedDetail.data.name}
                 </h3>
               </div>
               <button
                 onClick={() => setSelectedDetail(null)}
-                className="p-1 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100"
+                className="p-1 rounded-full text-gray-400 hover:text-nhs-muted hover:bg-gray-100"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="space-y-4 text-xs text-gray-700 leading-relaxed">
+            <div className="space-y-4 text-xs text-nhs-muted leading-relaxed">
               <div>
-                <span className="font-bold text-gray-900 block mb-1">Status</span>
+                <span className="font-semibold text-nhs-text block mb-1">Status</span>
                 {renderStatusBadge(selectedDetail.data.status)}
               </div>
 
               {selectedDetail.data.description && (
                 <div>
-                  <span className="font-bold text-gray-900 block mb-1">Overview</span>
-                  <p className="bg-gray-50 p-3 rounded-xl border border-gray-100 text-gray-600">
+                  <span className="font-semibold text-nhs-text block mb-1">Overview</span>
+                  <p className="bg-gray-50 p-3 rounded-md border border-nhs-border text-nhs-muted">
                     {selectedDetail.data.description}
                   </p>
                 </div>
               )}
 
-              <div className="grid grid-cols-2 gap-3 bg-blue-50/50 p-4 rounded-xl border border-blue-100/50">
+              <div className="grid grid-cols-2 gap-3 bg-blue-50/50 p-4 rounded-md border border-blue-100/50">
                 <div>
-                  <span className="font-bold text-gray-900 block mb-0.5 flex items-center gap-1">
+                  <span className="font-semibold text-nhs-text block mb-0.5 flex items-center gap-1">
                     <MapPin className="w-3.5 h-3.5 text-[#003087]" /> Location
                   </span>
-                  <p className="text-gray-700 font-medium">{selectedDetail.data.location}</p>
+                  <p className="text-nhs-muted font-medium">{selectedDetail.data.location}</p>
                   {'floor' in selectedDetail.data && selectedDetail.data.floor && (
-                    <span className="text-gray-500 font-normal">{selectedDetail.data.floor}</span>
+                    <span className="text-nhs-muted font-normal">{selectedDetail.data.floor}</span>
                   )}
                 </div>
 
                 <div>
-                  <span className="font-bold text-gray-900 block mb-0.5 flex items-center gap-1">
+                  <span className="font-semibold text-nhs-text block mb-0.5 flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5 text-[#003087]" /> Operating Hours
                   </span>
-                  <p className="text-gray-700 font-medium">{selectedDetail.data.openingHours}</p>
+                  <p className="text-nhs-muted font-medium">{selectedDetail.data.openingHours}</p>
                 </div>
               </div>
 
               {selectedDetail.data.contactPhone && (
                 <div>
-                  <span className="font-bold text-gray-900 block mb-0.5">Contact Direct Line</span>
-                  <p className="text-gray-700">{selectedDetail.data.contactPhone}</p>
+                  <span className="font-semibold text-nhs-text block mb-0.5">Contact Direct Line</span>
+                  <p className="text-nhs-muted">{selectedDetail.data.contactPhone}</p>
                 </div>
               )}
 
               {'accessibilityInfo' in selectedDetail.data && selectedDetail.data.accessibilityInfo && (
                 <div>
-                  <span className="font-bold text-gray-900 block mb-1">Accessibility Information</span>
-                  <p className="bg-emerald-50 text-emerald-900 p-3 rounded-xl border border-emerald-100 font-medium">
+                  <span className="font-semibold text-nhs-text block mb-1">Accessibility Information</span>
+                  <p className="bg-emerald-50 text-emerald-900 p-3 rounded-md border border-emerald-100 font-medium">
                     ♿ {selectedDetail.data.accessibilityInfo}
                   </p>
                 </div>
               )}
 
               {/* Resource Integration (Requirement 21) */}
-              <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
-                <span className="text-gray-500">Related Clinical Documentation:</span>
+              <div className="pt-2 border-t border-nhs-border flex items-center justify-between">
+                <span className="text-nhs-muted">Related Clinical Documentation:</span>
                 <a
                   href="#resources"
                   onClick={(e) => {
@@ -809,17 +809,17 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
                     setSelectedDetail(null);
                     alert(`Direct link to clinical resource guide for: ${selectedDetail.data.name}`);
                   }}
-                  className="text-[#003087] font-bold hover:underline inline-flex items-center gap-1"
+                  className="text-[#003087] font-semibold hover:underline inline-flex items-center gap-1"
                 >
                   View Related Resource <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </div>
             </div>
 
-            <div className="pt-3 border-t border-gray-100 flex justify-end">
+            <div className="pt-3 border-t border-nhs-border flex justify-end">
               <button
                 onClick={() => setSelectedDetail(null)}
-                className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold rounded-xl"
+                className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-nhs-text text-xs font-semibold rounded-md"
               >
                 Close Window
               </button>
@@ -830,30 +830,30 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
 
       {/* Admin Create/Edit Modal (Requirement 14 & 15) */}
       {showAdminModal && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl border border-gray-200 max-w-lg w-full p-6 space-y-4 shadow-2xl animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between border-b border-gray-100 pb-3">
-              <h3 className="text-base font-bold text-gray-900">
+        <div className="fixed inset-0 z-50 bg-black/50  flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg border border-nhs-border max-w-lg w-full p-6 space-y-4 shadow-sm animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between border-b border-nhs-border pb-3">
+              <h3 className="text-base font-semibold text-nhs-text">
                 {adminModalMode === 'create' ? 'Add New' : 'Edit'}{' '}
                 {adminTargetType === 'facility' ? 'Hospital Facility' : 'Clinical Service'}
               </h3>
               <button
                 onClick={() => setShowAdminModal(false)}
-                className="p-1 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100"
+                className="p-1 rounded-full text-gray-400 hover:text-nhs-muted hover:bg-gray-100"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {formError && (
-              <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-rose-800 text-xs font-medium">
+              <div className="p-3 bg-rose-50 border border-rose-200 rounded-md text-rose-800 text-xs font-medium">
                 {formError}
               </div>
             )}
 
             <form onSubmit={handleAdminFormSubmit} className="space-y-4 text-xs">
               <div>
-                <label className="font-bold text-gray-700 block mb-1">
+                <label className="font-semibold text-nhs-muted block mb-1">
                   {adminTargetType === 'facility' ? 'Facility Name' : 'Service Name'} *
                 </label>
                 <input
@@ -862,17 +862,17 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="e.g. Cardiology Clinic or Outpatient Pharmacy"
-                  className="w-full px-3 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#003087]/20 focus:border-[#003087]"
+                  className="w-full px-3 py-2 border border-nhs-border rounded-md focus:ring-2 focus:ring-[#003087]/20 focus:border-[#003087]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="font-bold text-gray-700 block mb-1">Category *</label>
+                  <label className="font-semibold text-nhs-muted block mb-1">Category *</label>
                   <select
                     value={formData.category}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#003087]/20"
+                    className="w-full px-3 py-2 border border-nhs-border rounded-md focus:ring-2 focus:ring-[#003087]/20"
                   >
                     <option value="Emergency">Emergency</option>
                     <option value="Clinical">Clinical</option>
@@ -886,11 +886,11 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
                 </div>
 
                 <div>
-                  <label className="font-bold text-gray-700 block mb-1">Status *</label>
+                  <label className="font-semibold text-nhs-muted block mb-1">Status *</label>
                   <select
                     value={formData.status}
                     onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#003087]/20"
+                    className="w-full px-3 py-2 border border-nhs-border rounded-md focus:ring-2 focus:ring-[#003087]/20"
                   >
                     <option value="OPEN">OPEN</option>
                     <option value="CLOSED">CLOSED</option>
@@ -902,75 +902,75 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
               </div>
 
               <div>
-                <label className="font-bold text-gray-700 block mb-1">Description</label>
+                <label className="font-semibold text-nhs-muted block mb-1">Description</label>
                 <textarea
                   rows={2}
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="Short description of clinical or operational capabilities..."
-                  className="w-full px-3 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#003087]/20"
+                  className="w-full px-3 py-2 border border-nhs-border rounded-md focus:ring-2 focus:ring-[#003087]/20"
                 ></textarea>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="font-bold text-gray-700 block mb-1">Location *</label>
+                  <label className="font-semibold text-nhs-muted block mb-1">Location *</label>
                   <input
                     type="text"
                     required
                     value={formData.location}
                     onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                     placeholder="e.g. Ground Floor, Block A"
-                    className="w-full px-3 py-2 border border-gray-200 rounded-xl"
+                    className="w-full px-3 py-2 border border-nhs-border rounded-md"
                   />
                 </div>
 
                 <div>
-                  <label className="font-bold text-gray-700 block mb-1">Opening Hours *</label>
+                  <label className="font-semibold text-nhs-muted block mb-1">Opening Hours *</label>
                   <input
                     type="text"
                     required
                     value={formData.openingHours}
                     onChange={(e) => setFormData({ ...formData, openingHours: e.target.value })}
                     placeholder="e.g. Open 24 hours or Mon-Fri 08:00-18:00"
-                    className="w-full px-3 py-2 border border-gray-200 rounded-xl"
+                    className="w-full px-3 py-2 border border-nhs-border rounded-md"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="font-bold text-gray-700 block mb-1">Contact Phone</label>
+                  <label className="font-semibold text-nhs-muted block mb-1">Contact Phone</label>
                   <input
                     type="text"
                     value={formData.contactPhone}
                     onChange={(e) => setFormData({ ...formData, contactPhone: e.target.value })}
                     placeholder="+44 20 7946 0000"
-                    className="w-full px-3 py-2 border border-gray-200 rounded-xl"
+                    className="w-full px-3 py-2 border border-nhs-border rounded-md"
                   />
                 </div>
 
                 <div>
-                  <label className="font-bold text-gray-700 block mb-1">Email</label>
+                  <label className="font-semibold text-nhs-muted block mb-1">Email</label>
                   <input
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="dept@nhs-hospital.demo"
-                    className="w-full px-3 py-2 border border-gray-200 rounded-xl"
+                    className="w-full px-3 py-2 border border-nhs-border rounded-md"
                   />
                 </div>
               </div>
 
               {adminTargetType === 'facility' && (
                 <div>
-                  <label className="font-bold text-gray-700 block mb-1">Accessibility Information</label>
+                  <label className="font-semibold text-nhs-muted block mb-1">Accessibility Information</label>
                   <input
                     type="text"
                     value={formData.accessibilityInfo}
                     onChange={(e) => setFormData({ ...formData, accessibilityInfo: e.target.value })}
                     placeholder="e.g. Wheelchair ramp, Braille signage, Hearing loop"
-                    className="w-full px-3 py-2 border border-gray-200 rounded-xl"
+                    className="w-full px-3 py-2 border border-nhs-border rounded-md"
                   />
                 </div>
               )}
@@ -983,23 +983,23 @@ export const FacilitiesServicesPage: React.FC<FacilitiesServicesPageProps> = ({ 
                   onChange={(e) => setFormData({ ...formData, isStaffOnly: e.target.checked })}
                   className="w-4 h-4 text-[#003087] rounded border-gray-300 focus:ring-[#003087]"
                 />
-                <label htmlFor="isStaffOnly" className="font-semibold text-gray-700 cursor-pointer">
+                <label htmlFor="isStaffOnly" className="font-semibold text-nhs-muted cursor-pointer">
                   Restrict to Staff & Admin Users Only (Hide from Patient users)
                 </label>
               </div>
 
-              <div className="pt-4 border-t border-gray-100 flex items-center justify-end gap-2">
+              <div className="pt-4 border-t border-nhs-border flex items-center justify-end gap-2">
                 <button
                   type="button"
                   onClick={() => setShowAdminModal(false)}
-                  className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold rounded-xl"
+                  className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-nhs-text text-xs font-semibold rounded-md"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={formSubmitting}
-                  className="px-4 py-2 bg-[#003087] hover:bg-[#002060] text-white text-xs font-bold rounded-xl flex items-center gap-1.5 disabled:opacity-50"
+                  className="px-4 py-2 bg-[#003087] hover:bg-[#002060] text-white text-xs font-semibold rounded-md flex items-center gap-1.5 disabled:opacity-50"
                 >
                   {formSubmitting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   {adminModalMode === 'create' ? 'Save New Record' : 'Update Record'}

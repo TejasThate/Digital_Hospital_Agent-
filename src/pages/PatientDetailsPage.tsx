@@ -235,40 +235,40 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
   const minVal = Math.min(...chartPoints.map(p => p.val)) * 0.85;
 
   return (
-    <div className="min-h-screen bg-[#F3F5F9] text-slate-800 p-4 sm:p-6 lg:p-8 space-y-6">
+    <div className="min-h-screen bg-[#F3F5F9] text-nhs-text p-4 sm:p-6 lg:p-8 space-y-6">
       {/* TOP BAR: Back Navigation + Patient Title + Action Buttons */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-4 rounded-3xl border border-slate-200/80 shadow-xs">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-4 rounded-lg border border-nhs-border shadow-sm">
         <div className="flex items-center gap-4">
           <button
             onClick={onBack}
-            className="p-2.5 bg-slate-100 hover:bg-slate-200/80 text-slate-700 rounded-2xl transition-colors font-bold text-xs flex items-center gap-1.5 cursor-pointer"
+            className="p-2.5 bg-gray-50 hover:bg-slate-200/80 text-slate-700 rounded-lg transition-colors font-semibold text-xs flex items-center gap-1.5 cursor-pointer"
           >
             <ChevronLeft className="w-4 h-4" />
             Back to Patients
           </button>
           <div>
             <div className="flex items-center gap-2.5">
-              <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">{pName}</h1>
-              <span className="px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200/80 text-[11px] font-extrabold rounded-full">
+              <h1 className="text-xl sm:text-2xl font-semibold text-nhs-text tracking-tight">{pName}</h1>
+              <span className="px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200/80 text-[11px] font-semibold rounded-full">
                 {patient?.status || 'Active Inpatient'}
               </span>
             </div>
-            <p className="text-xs text-slate-500 font-mono font-medium mt-0.5">
-              NHS ID: <strong className="text-[#003087] font-bold">{pCode}</strong> · MRN: {patientId}
+            <p className="text-xs text-nhs-muted font-mono font-medium mt-0.5">
+              NHS ID: <strong className="text-[#003087] font-semibold">{pCode}</strong> · MRN: {patientId}
             </p>
           </div>
         </div>
 
         {/* Navigation Tabs */}
-        <div className="flex items-center gap-1 overflow-x-auto w-full md:w-auto bg-slate-100 p-1.5 rounded-2xl border border-slate-200/60 text-xs font-bold">
+        <div className="flex items-center gap-1 overflow-x-auto w-full md:w-auto bg-gray-50 p-1.5 rounded-lg border border-nhs-border/60 text-xs font-semibold">
           {(['Overview', 'Appointments', 'Medical Reports', 'Medical Tests', 'Imaging'] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-3.5 py-1.5 rounded-xl transition-all whitespace-nowrap cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-md  whitespace-nowrap cursor-pointer ${
                 activeTab === tab
-                  ? 'bg-white text-[#003087] shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-white text-[#003087] shadow-sm'
+                  : 'text-nhs-muted hover:text-nhs-text'
               }`}
             >
               {tab === 'Medical Reports' ? 'Medical Reports (4)' : tab}
@@ -280,14 +280,14 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
         <div className="flex items-center gap-2.5 w-full md:w-auto justify-end">
           <button
             onClick={() => alert(`Downloading Patient Summary PDF for ${pName}...`)}
-            className="px-4 py-2 bg-[#003087] hover:bg-[#002060] text-white rounded-2xl text-xs font-extrabold flex items-center gap-2 transition-all shadow-xs cursor-pointer"
+            className="px-4 py-2 bg-[#003087] hover:bg-[#002060] text-white rounded-lg text-xs font-semibold flex items-center gap-2  shadow-sm cursor-pointer"
           >
             <Download className="w-4 h-4" />
             Download Summary
           </button>
           <button
             onClick={() => alert('Patient Alerts & Notifications opened')}
-            className="p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-2xl transition-colors relative cursor-pointer"
+            className="p-2.5 bg-gray-50 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors relative cursor-pointer"
             title="Notifications"
           >
             <Bell className="w-4.5 h-4.5" />
@@ -313,15 +313,15 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
           <div className="lg:col-span-3 space-y-6">
             
             {/* Patient Profile Card */}
-            <div className="bg-white rounded-3xl border border-slate-200/80 p-5 shadow-xs space-y-5">
+            <div className="bg-white rounded-lg border border-nhs-border p-5 shadow-sm space-y-5">
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#003087] to-blue-600 text-white font-extrabold flex items-center justify-center text-xl shadow-md">
+                <div className="w-14 h-14 rounded-lg bg-gradient-to-tr from-[#003087] to-blue-600 text-white font-semibold flex items-center justify-center text-xl shadow-md">
                   {pName.split(' ').map((n: string) => n[0]).join('')}
                 </div>
                 <div>
-                  <h3 className="font-extrabold text-slate-900 text-base">{pName}</h3>
-                  <p className="text-xs text-slate-500 font-medium">{pGender}, {pAge} yrs · DOB: {pDob}</p>
-                  <span className="inline-block mt-1 px-2.5 py-0.5 bg-blue-50 text-[#003087] border border-blue-200/60 rounded-full text-[10px] font-bold">
+                  <h3 className="font-semibold text-nhs-text text-base">{pName}</h3>
+                  <p className="text-xs text-nhs-muted font-medium">{pGender}, {pAge} yrs · DOB: {pDob}</p>
+                  <span className="inline-block mt-1 px-2.5 py-0.5 bg-blue-50 text-[#003087] border border-blue-200/60 rounded-full text-[10px] font-semibold">
                     Blood Group: {patient?.bloodGroup || 'A+'}
                   </span>
                 </div>
@@ -329,26 +329,26 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
 
               <div className="space-y-3 pt-3 border-t border-slate-100 text-xs">
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Primary Physician</p>
-                  <p className="font-bold text-slate-900 mt-0.5">{pPhysician}</p>
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Primary Physician</p>
+                  <p className="font-semibold text-nhs-text mt-0.5">{pPhysician}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Insurance Plan</p>
-                  <p className="font-bold text-slate-900 mt-0.5">{pInsurance}</p>
-                  <p className="text-[11px] text-slate-500 font-mono">Policy #: {pPolicy}</p>
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Insurance Plan</p>
+                  <p className="font-semibold text-nhs-text mt-0.5">{pInsurance}</p>
+                  <p className="text-[11px] text-nhs-muted font-mono">Policy #: {pPolicy}</p>
                 </div>
               </div>
 
               {/* Allergies Pill Tags */}
               <div className="space-y-2 pt-3 border-t border-slate-100">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1">
                   <ShieldAlert className="w-3.5 h-3.5 text-rose-500" /> Allergies & Sensitivities
                 </p>
                 <div className="flex flex-wrap gap-1.5">
                   {pAllergies.map((allergy: string, idx: number) => (
                     <span
                       key={idx}
-                      className="px-2.5 py-1 bg-rose-50 text-rose-700 border border-rose-200/80 rounded-xl font-bold text-[11px]"
+                      className="px-2.5 py-1 bg-rose-50 text-rose-700 border border-rose-200/80 rounded-md font-semibold text-[11px]"
                     >
                       {allergy}
                     </span>
@@ -358,17 +358,17 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
 
               {/* Latest Diagnoses / Problems */}
               <div className="space-y-2.5 pt-3 border-t border-slate-100">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1">
                   <Stethoscope className="w-3.5 h-3.5 text-[#003087]" /> Active Problem List
                 </p>
                 <div className="space-y-2 text-xs">
                   {pProblems.map((prob: any, idx: number) => (
-                    <div key={idx} className="p-2.5 bg-slate-50 rounded-2xl border border-slate-200/60 flex items-center justify-between">
+                    <div key={idx} className="p-2.5 bg-gray-50 rounded-lg border border-nhs-border/60 flex items-center justify-between">
                       <div>
-                        <p className="font-bold text-slate-900 text-xs">{prob.name}</p>
-                        <p className="text-[10px] text-slate-500">{prob.severity} Severity</p>
+                        <p className="font-semibold text-nhs-text text-xs">{prob.name}</p>
+                        <p className="text-[10px] text-nhs-muted">{prob.severity} Severity</p>
                       </div>
-                      <span className="px-2 py-0.5 bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-bold rounded-lg">
+                      <span className="px-2 py-0.5 bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-semibold rounded-lg">
                         {prob.status}
                       </span>
                     </div>
@@ -378,36 +378,36 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
             </div>
 
             {/* Upcoming Appointment Card */}
-            <div className="bg-white rounded-3xl border border-slate-200/80 p-5 shadow-xs space-y-4">
+            <div className="bg-white rounded-lg border border-nhs-border p-5 shadow-sm space-y-4">
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                <span className="font-extrabold text-slate-900 text-xs flex items-center gap-2">
+                <span className="font-semibold text-nhs-text text-xs flex items-center gap-2">
                   <Calendar className="w-4 h-4 text-[#003087]" /> Upcoming Appointment
                 </span>
-                <span className="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-extrabold rounded-full">
+                <span className="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-semibold rounded-full">
                   {pUpcoming.status}
                 </span>
               </div>
 
               <div>
-                <h4 className="font-extrabold text-slate-900 text-sm">{pUpcoming.title}</h4>
-                <p className="text-xs text-slate-600 font-medium mt-1">{pUpcoming.physician}</p>
-                <p className="text-xs text-slate-500 flex items-center gap-1.5 mt-2">
+                <h4 className="font-semibold text-nhs-text text-sm">{pUpcoming.title}</h4>
+                <p className="text-xs text-nhs-muted font-medium mt-1">{pUpcoming.physician}</p>
+                <p className="text-xs text-nhs-muted flex items-center gap-1.5 mt-2">
                   <Clock className="w-3.5 h-3.5 text-slate-400" /> {pUpcoming.date}
                 </p>
-                <p className="text-xs text-slate-500 flex items-center gap-1.5 mt-1">
+                <p className="text-xs text-nhs-muted flex items-center gap-1.5 mt-1">
                   <MapPin className="w-3.5 h-3.5 text-slate-400" /> {pUpcoming.room}
                 </p>
               </div>
 
               {/* Itinerary Timeline */}
               <div className="space-y-3 pt-3 border-t border-slate-100">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Appointment Itinerary</p>
-                <div className="relative pl-4 space-y-3 border-l-2 border-slate-200 text-xs">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Appointment Itinerary</p>
+                <div className="relative pl-4 space-y-3 border-l-2 border-nhs-border text-xs">
                   {pUpcoming.itinerary.map((item: any, idx: number) => (
                     <div key={idx} className="relative">
                       <span className="absolute -left-[21px] top-1 w-2.5 h-2.5 bg-[#003087] rounded-full border-2 border-white" />
-                      <p className="font-mono text-[10px] font-bold text-slate-400">{item.time}</p>
-                      <p className="font-semibold text-slate-800 text-[11px]">{item.task}</p>
+                      <p className="font-mono text-[10px] font-semibold text-slate-400">{item.time}</p>
+                      <p className="font-semibold text-nhs-text text-[11px]">{item.task}</p>
                     </div>
                   ))}
                 </div>
@@ -417,7 +417,7 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
 
 
           {/* =================================================== */}
-          {/* COLUMN 2: CENTER PANEL (Metrics, Chart, Labs, AI)   */}
+          {/* COLUMN 2: CENTER PANEL (Metrics, Chart, Labs, Support)   */}
           {/* =================================================== */}
           <div className="lg:col-span-6 space-y-6">
             
@@ -425,70 +425,70 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
               
               {/* Metric 1: Weight */}
-              <div className="bg-white p-4 rounded-3xl border border-slate-200/80 shadow-xs space-y-1.5 hover:border-slate-300 transition-all">
+              <div className="bg-white p-4 rounded-lg border border-nhs-border shadow-sm space-y-1.5 hover:border-slate-300 ">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
-                    <Scale className="w-3.5 h-3.5 text-blue-600" /> Weight
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1">
+                    <Scale className="w-3.5 h-3.5 text-nhs-blue" /> Weight
                   </span>
                 </div>
-                <p className="font-extrabold text-slate-900 text-lg tracking-tight">{pVitals.weight}</p>
-                <p className="text-[10px] text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-lg border border-emerald-100 inline-block">
+                <p className="font-semibold text-nhs-text text-lg tracking-tight">{pVitals.weight}</p>
+                <p className="text-[10px] text-emerald-600 font-semibold bg-emerald-50 px-2 py-0.5 rounded-lg border border-emerald-100 inline-block">
                   {pVitals.weightTrend}
                 </p>
               </div>
 
               {/* Metric 2: Body Temperature */}
-              <div className="bg-white p-4 rounded-3xl border border-slate-200/80 shadow-xs space-y-1.5 hover:border-slate-300 transition-all">
+              <div className="bg-white p-4 rounded-lg border border-nhs-border shadow-sm space-y-1.5 hover:border-slate-300 ">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1">
                     <Thermometer className="w-3.5 h-3.5 text-amber-600" /> Temp
                   </span>
                 </div>
-                <p className="font-extrabold text-slate-900 text-lg tracking-tight">{pVitals.temperature}</p>
-                <p className="text-[10px] text-slate-600 font-bold bg-slate-100 px-2 py-0.5 rounded-lg inline-block">
+                <p className="font-semibold text-nhs-text text-lg tracking-tight">{pVitals.temperature}</p>
+                <p className="text-[10px] text-nhs-muted font-semibold bg-gray-50 px-2 py-0.5 rounded-lg inline-block">
                   {pVitals.tempStatus}
                 </p>
               </div>
 
               {/* Metric 3: Heart Rate */}
-              <div className="bg-white p-4 rounded-3xl border border-slate-200/80 shadow-xs space-y-1.5 hover:border-slate-300 transition-all">
+              <div className="bg-white p-4 rounded-lg border border-nhs-border shadow-sm space-y-1.5 hover:border-slate-300 ">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1">
                     <Heart className="w-3.5 h-3.5 text-rose-600 animate-pulse" /> Heart Rate
                   </span>
                 </div>
-                <p className="font-extrabold text-slate-900 text-lg tracking-tight">{pVitals.heartRate}</p>
-                <p className="text-[10px] text-amber-700 font-bold bg-amber-50 px-2 py-0.5 rounded-lg border border-amber-200 inline-block">
+                <p className="font-semibold text-nhs-text text-lg tracking-tight">{pVitals.heartRate}</p>
+                <p className="text-[10px] text-amber-700 font-semibold bg-amber-50 px-2 py-0.5 rounded-lg border border-amber-200 inline-block">
                   {pVitals.hrStatus}
                 </p>
               </div>
 
               {/* Metric 4: Oxygen Saturation (SpO2) */}
-              <div className="bg-white p-4 rounded-3xl border border-slate-200/80 shadow-xs space-y-1.5 hover:border-slate-300 transition-all">
+              <div className="bg-white p-4 rounded-lg border border-nhs-border shadow-sm space-y-1.5 hover:border-slate-300 ">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1">
                     <Activity className="w-3.5 h-3.5 text-cyan-600" /> SpO2
                   </span>
                 </div>
-                <p className="font-extrabold text-slate-900 text-lg tracking-tight">{pVitals.spo2}</p>
-                <p className="text-[10px] text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-lg border border-emerald-100 inline-block">
+                <p className="font-semibold text-nhs-text text-lg tracking-tight">{pVitals.spo2}</p>
+                <p className="text-[10px] text-emerald-700 font-semibold bg-emerald-50 px-2 py-0.5 rounded-lg border border-emerald-100 inline-block">
                   {pVitals.spo2Status}
                 </p>
               </div>
             </div>
 
             {/* Health Metrics Timeline Interactive SVG Line Chart */}
-            <div className="bg-white rounded-3xl border border-slate-200/80 p-5 shadow-xs space-y-4">
+            <div className="bg-white rounded-lg border border-nhs-border p-5 shadow-sm space-y-4">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-100 pb-3">
                 <div>
-                  <h3 className="font-extrabold text-slate-900 text-sm flex items-center gap-2">
+                  <h3 className="font-semibold text-nhs-text text-sm flex items-center gap-2">
                     <TrendingUp className="w-4 h-4 text-[#003087]" /> Health Metrics Timeline
                   </h3>
-                  <p className="text-[11px] text-slate-500 font-medium">Historical vital trends across clinical recording sessions</p>
+                  <p className="text-[11px] text-nhs-muted font-medium">Historical vital trends across clinical recording sessions</p>
                 </div>
 
                 {/* Metric Selector Tabs */}
-                <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl text-xs font-bold">
+                <div className="flex items-center gap-1 bg-gray-50 p-1 rounded-md text-xs font-semibold">
                   {[
                     { key: 'heartRate', label: 'Heart Rate' },
                     { key: 'bloodPressure', label: 'Blood Pressure' },
@@ -500,8 +500,8 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
                       onClick={() => setSelectedMetric(m.key as any)}
                       className={`px-2.5 py-1 rounded-lg transition-colors text-[11px] cursor-pointer ${
                         selectedMetric === m.key
-                          ? 'bg-white text-[#003087] shadow-2xs font-extrabold'
-                          : 'text-slate-600 hover:text-slate-900'
+                          ? 'bg-white text-[#003087] shadow-2xs font-semibold'
+                          : 'text-nhs-muted hover:text-nhs-text'
                       }`}
                     >
                       {m.label}
@@ -517,8 +517,8 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
                     <button
                       key={tf}
                       onClick={() => setTimeframe(tf)}
-                      className={`px-2.5 py-1 rounded-lg text-[10px] font-extrabold transition-colors cursor-pointer ${
-                        timeframe === tf ? 'bg-[#003087] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                      className={`px-2.5 py-1 rounded-lg text-[10px] font-semibold transition-colors cursor-pointer ${
+                        timeframe === tf ? 'bg-[#003087] text-white' : 'bg-gray-50 text-nhs-muted hover:bg-slate-200'
                       }`}
                     >
                       {tf}
@@ -573,7 +573,7 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
                               x={p.x}
                               y={p.y - 12}
                               textAnchor="middle"
-                              className="fill-slate-900 text-[10px] font-extrabold font-mono"
+                              className="fill-slate-900 text-[10px] font-semibold font-mono"
                             >
                               {p.pt.label}
                             </text>
@@ -585,7 +585,7 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
                 </svg>
 
                 {/* X Axis Labels */}
-                <div className="flex justify-between items-center text-[10px] text-slate-400 font-mono font-bold mt-2 pt-2 border-t border-slate-100">
+                <div className="flex justify-between items-center text-[10px] text-slate-400 font-mono font-semibold mt-2 pt-2 border-t border-slate-100">
                   {chartPoints.map((pt, i) => (
                     <span key={i}>{pt.year}</span>
                   ))}
@@ -594,50 +594,50 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
             </div>
 
             {/* Labs & Diagnostic Card */}
-            <div className="bg-white rounded-3xl border border-slate-200/80 p-5 shadow-xs space-y-4">
+            <div className="bg-white rounded-lg border border-nhs-border p-5 shadow-sm space-y-4">
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                <span className="font-extrabold text-slate-900 text-sm flex items-center gap-2">
-                  <Droplet className="w-4 h-4 text-blue-600" /> Laboratory & Electrolyte Profile
+                <span className="font-semibold text-nhs-text text-sm flex items-center gap-2">
+                  <Droplet className="w-4 h-4 text-nhs-blue" /> Laboratory & Electrolyte Profile
                 </span>
-                <span className="text-[10px] text-slate-400 font-bold">Latest Panel · Normal Bounds</span>
+                <span className="text-[10px] text-slate-400 font-semibold">Latest Panel · Normal Bounds</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {pLabs.map((lab: any, idx: number) => (
-                  <div key={idx} className="p-3 bg-slate-50 rounded-2xl border border-slate-200/60 space-y-2">
+                  <div key={idx} className="p-3 bg-gray-50 rounded-lg border border-nhs-border/60 space-y-2">
                     <div className="flex justify-between items-center text-xs">
-                      <span className="font-bold text-slate-800">{lab.name}</span>
-                      <span className="font-extrabold text-slate-900 font-mono">{lab.value} {lab.unit}</span>
+                      <span className="font-semibold text-nhs-text">{lab.name}</span>
+                      <span className="font-semibold text-nhs-text font-mono">{lab.value} {lab.unit}</span>
                     </div>
                     
                     {/* Horizontal Progress Bar */}
                     <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
                       <div
-                        className="bg-[#003087] h-full rounded-full transition-all duration-500"
+                        className="bg-[#003087] h-full rounded-full  duration-500"
                         style={{ width: `${lab.percentage}%` }}
                       />
                     </div>
                     <div className="flex justify-between items-center text-[10px] text-slate-400">
                       <span>Ref Range: {lab.normal}</span>
-                      <span className="text-emerald-700 font-bold">{lab.status}</span>
+                      <span className="text-emerald-700 font-semibold">{lab.status}</span>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* AI Assistant Report Card (Soft Blue Tint) */}
-            <div className="bg-blue-50/70 border border-blue-200/80 rounded-3xl p-5 shadow-xs space-y-3">
+            {/* Assistant Report Card (Soft Blue Tint) */}
+            <div className="bg-blue-50/70 border border-blue-200/80 rounded-lg p-5 shadow-sm space-y-3">
               <div className="flex items-center gap-2 text-[#003087]">
                 <Sparkles className="w-5 h-5" />
-                <h4 className="font-extrabold text-sm text-[#003087]">AI Assistant Clinical Findings & Summary</h4>
+                <h4 className="font-semibold text-sm text-[#003087]">Assistant Clinical Findings & Summary</h4>
               </div>
               <p className="text-xs text-slate-700 leading-relaxed font-medium">
                 Patient displays stable vital metrics post-admission. Heart rate trend reflects mild baseline elevation during physical exertion, while SpO2 remains optimum. Laboratory results show balanced electrolyte levels (Mg: {pLabs[0]?.value}, K: {pLabs[1]?.value}). LightGBM triage model assesses standard risk profile with advice for routine cardiology follow-up in 14 days.
               </p>
               <div className="pt-2 border-t border-blue-200/60 flex items-center gap-1.5 text-[10px] text-blue-900/70 font-semibold">
                 <Info className="w-3.5 h-3.5" />
-                AI decision support tool. Clinical judgment must be verified by a qualified NHS physician.
+                Clinical decision support tool. Clinical judgment must be verified by a qualified NHS physician.
               </div>
             </div>
 
@@ -645,17 +645,17 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
 
 
           {/* =================================================== */}
-          {/* COLUMN 3: RIGHT PANEL (Risk Forecast & AI Insights) */}
+          {/* COLUMN 3: RIGHT PANEL (Risk Forecast & Insights) */}
           {/* =================================================== */}
           <div className="lg:col-span-3 space-y-6">
             
             {/* Risk Forecast Panel */}
-            <div className="bg-white rounded-3xl border border-slate-200/80 p-5 shadow-xs space-y-5">
+            <div className="bg-white rounded-lg border border-nhs-border p-5 shadow-sm space-y-5">
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                <span className="font-extrabold text-slate-900 text-xs flex items-center gap-2">
-                  <ShieldAlert className="w-4 h-4 text-emerald-600" /> AI Risk Forecast Model
+                <span className="font-semibold text-nhs-text text-xs flex items-center gap-2">
+                  <ShieldAlert className="w-4 h-4 text-emerald-600" /> Clinical Risk Forecast Model
                 </span>
-                <span className="px-2.5 py-0.5 bg-blue-50 text-[#003087] border border-blue-200 text-[10px] font-extrabold rounded-full">
+                <span className="px-2.5 py-0.5 bg-blue-50 text-[#003087] border border-blue-200 text-[10px] font-semibold rounded-full">
                   LightGBM v2.4
                 </span>
               </div>
@@ -664,7 +664,7 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
               <div className="space-y-4">
                 
                 {/* Gauge 1: Cardiovascular */}
-                <div className="flex items-center gap-3.5 p-3 bg-slate-50 rounded-2xl border border-slate-200/60">
+                <div className="flex items-center gap-3.5 p-3 bg-gray-50 rounded-lg border border-nhs-border/60">
                   <div className="relative w-12 h-12 flex items-center justify-center flex-shrink-0">
                     <svg className="w-12 h-12 transform -rotate-90">
                       <circle cx="24" cy="24" r="18" stroke="#E2E8F0" strokeWidth="4" fill="transparent" />
@@ -680,17 +680,17 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
                         strokeLinecap="round"
                       />
                     </svg>
-                    <span className="absolute text-[10px] font-extrabold text-slate-900">{pRisks.cardiovascular.percentage}%</span>
+                    <span className="absolute text-[10px] font-semibold text-nhs-text">{pRisks.cardiovascular.percentage}%</span>
                   </div>
                   <div>
-                    <p className="font-bold text-slate-900 text-xs">Cardiovascular Risk</p>
-                    <p className="text-[10px] text-emerald-700 font-extrabold">{pRisks.cardiovascular.level}</p>
+                    <p className="font-semibold text-nhs-text text-xs">Cardiovascular Risk</p>
+                    <p className="text-[10px] text-emerald-700 font-semibold">{pRisks.cardiovascular.level}</p>
                     <p className="text-[10px] text-slate-400">30-Day Predictive Horizon</p>
                   </div>
                 </div>
 
                 {/* Gauge 2: Stroke Risk */}
-                <div className="flex items-center gap-3.5 p-3 bg-slate-50 rounded-2xl border border-slate-200/60">
+                <div className="flex items-center gap-3.5 p-3 bg-gray-50 rounded-lg border border-nhs-border/60">
                   <div className="relative w-12 h-12 flex items-center justify-center flex-shrink-0">
                     <svg className="w-12 h-12 transform -rotate-90">
                       <circle cx="24" cy="24" r="18" stroke="#E2E8F0" strokeWidth="4" fill="transparent" />
@@ -706,17 +706,17 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
                         strokeLinecap="round"
                       />
                     </svg>
-                    <span className="absolute text-[10px] font-extrabold text-slate-900">{pRisks.stroke.percentage}%</span>
+                    <span className="absolute text-[10px] font-semibold text-nhs-text">{pRisks.stroke.percentage}%</span>
                   </div>
                   <div>
-                    <p className="font-bold text-slate-900 text-xs">Stroke Risk</p>
-                    <p className="text-[10px] text-emerald-700 font-extrabold">{pRisks.stroke.level}</p>
+                    <p className="font-semibold text-nhs-text text-xs">Stroke Risk</p>
+                    <p className="text-[10px] text-emerald-700 font-semibold">{pRisks.stroke.level}</p>
                     <p className="text-[10px] text-slate-400">Low Neuro-vascular Risk</p>
                   </div>
                 </div>
 
                 {/* Gauge 3: Type 2 Diabetes Risk */}
-                <div className="flex items-center gap-3.5 p-3 bg-amber-50/60 rounded-2xl border border-amber-200/60">
+                <div className="flex items-center gap-3.5 p-3 bg-amber-50/60 rounded-lg border border-amber-200/60">
                   <div className="relative w-12 h-12 flex items-center justify-center flex-shrink-0">
                     <svg className="w-12 h-12 transform -rotate-90">
                       <circle cx="24" cy="24" r="18" stroke="#FDE68A" strokeWidth="4" fill="transparent" />
@@ -732,11 +732,11 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
                         strokeLinecap="round"
                       />
                     </svg>
-                    <span className="absolute text-[10px] font-extrabold text-amber-900">{pRisks.diabetes.percentage}%</span>
+                    <span className="absolute text-[10px] font-semibold text-amber-900">{pRisks.diabetes.percentage}%</span>
                   </div>
                   <div>
-                    <p className="font-bold text-slate-900 text-xs">Type 2 Diabetes Risk</p>
-                    <p className="text-[10px] text-amber-700 font-extrabold">{pRisks.diabetes.level}</p>
+                    <p className="font-semibold text-nhs-text text-xs">Type 2 Diabetes Risk</p>
+                    <p className="text-[10px] text-amber-700 font-semibold">{pRisks.diabetes.level}</p>
                     <p className="text-[10px] text-slate-400">Metabolic Monitoring Urged</p>
                   </div>
                 </div>
@@ -745,7 +745,7 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
 
               {/* Contributing Factors */}
               <div className="space-y-2 pt-3 border-t border-slate-100">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Key Contributing Factors</p>
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Key Contributing Factors</p>
                 <ul className="space-y-1.5 text-xs font-medium text-slate-700">
                   {pRisks.factors.map((factor: string, idx: number) => (
                     <li key={idx} className="flex items-center gap-2">
@@ -757,20 +757,20 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
               </div>
 
               {/* Recommended Next Action */}
-              <div className="p-3 bg-slate-50 border border-slate-200/80 rounded-2xl space-y-1.5">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-[#003087]">Recommended Action</p>
-                <p className="text-xs text-slate-800 font-bold">Schedule HbA1c & Fasting Glucose Screening</p>
-                <p className="text-[10px] text-slate-500">Suggested within next 14 clinical days</p>
+              <div className="p-3 bg-gray-50 border border-nhs-border rounded-lg space-y-1.5">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-[#003087]">Recommended Action</p>
+                <p className="text-xs text-nhs-text font-semibold">Schedule HbA1c & Fasting Glucose Screening</p>
+                <p className="text-[10px] text-nhs-muted">Suggested within next 14 clinical days</p>
               </div>
             </div>
 
             {/* Quick Actions Panel */}
-            <div className="bg-white rounded-3xl border border-slate-200/80 p-5 shadow-xs space-y-3">
-              <h4 className="font-extrabold text-slate-900 text-xs uppercase tracking-wider text-slate-400">Clinical Actions</h4>
+            <div className="bg-white rounded-lg border border-nhs-border p-5 shadow-sm space-y-3">
+              <h4 className="font-semibold text-nhs-text text-xs uppercase tracking-wider text-slate-400">Clinical Actions</h4>
               <div className="space-y-2">
                 <button
                   onClick={() => alert(`Creating new prescription for ${pName}...`)}
-                  className="w-full py-2.5 px-3.5 bg-slate-50 hover:bg-slate-100 text-slate-800 border border-slate-200/80 rounded-2xl font-bold text-xs flex items-center justify-between transition-colors cursor-pointer"
+                  className="w-full py-2.5 px-3.5 bg-gray-50 hover:bg-gray-50 text-nhs-text border border-nhs-border rounded-lg font-semibold text-xs flex items-center justify-between transition-colors cursor-pointer"
                 >
                   <span className="flex items-center gap-2">
                     <Pill className="w-4 h-4 text-[#003087]" /> Add Prescription
@@ -779,16 +779,16 @@ export const PatientDetailsPage: React.FC<PatientDetailsPageProps> = ({
                 </button>
                 <button
                   onClick={() => alert(`Ordering new diagnostic lab test for ${pName}...`)}
-                  className="w-full py-2.5 px-3.5 bg-slate-50 hover:bg-slate-100 text-slate-800 border border-slate-200/80 rounded-2xl font-bold text-xs flex items-center justify-between transition-colors cursor-pointer"
+                  className="w-full py-2.5 px-3.5 bg-gray-50 hover:bg-gray-50 text-nhs-text border border-nhs-border rounded-lg font-semibold text-xs flex items-center justify-between transition-colors cursor-pointer"
                 >
                   <span className="flex items-center gap-2">
-                    <Droplet className="w-4 h-4 text-blue-600" /> Order Lab Test
+                    <Droplet className="w-4 h-4 text-nhs-blue" /> Order Lab Test
                   </span>
                   <ChevronRight className="w-4 h-4 text-slate-400" />
                 </button>
                 <button
                   onClick={() => alert(`Sharing record with clinical team...`)}
-                  className="w-full py-2.5 px-3.5 bg-slate-50 hover:bg-slate-100 text-slate-800 border border-slate-200/80 rounded-2xl font-bold text-xs flex items-center justify-between transition-colors cursor-pointer"
+                  className="w-full py-2.5 px-3.5 bg-gray-50 hover:bg-gray-50 text-nhs-text border border-nhs-border rounded-lg font-semibold text-xs flex items-center justify-between transition-colors cursor-pointer"
                 >
                   <span className="flex items-center gap-2">
                     <Share2 className="w-4 h-4 text-emerald-600" /> Share Record

@@ -179,117 +179,88 @@ export const SymptomTriageModal: React.FC<{ onClose: () => void }> = ({ onClose 
   };
 
   return (
-    <div className="fixed inset-0 bg-black/40 backdrop-blur-xs z-50 flex items-center justify-center p-4 overflow-y-auto">
-      <div className="bg-white rounded-2xl border border-gray-200 shadow-2xl max-w-xl w-full p-6 space-y-4 relative max-h-[90vh] flex flex-col">
+    <div className="fixed inset-0 bg-black/40  z-50 flex items-center justify-center p-4 overflow-y-auto">
+      <div className="bg-white rounded-lg border border-nhs-border shadow-sm max-w-xl w-full p-6 space-y-4 relative max-h-[90vh] flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-gray-100 pb-3 flex-shrink-0">
+        <div className="flex items-center justify-between border-b border-nhs-border pb-3 flex-shrink-0">
           <div className="flex items-center gap-2">
             <Stethoscope className="w-5 h-5 text-green-700" />
-            <h3 className="font-bold text-base text-gray-900">NHS Symptom Triage Checker</h3>
+            <h3 className="font-semibold text-base text-nhs-text">NHS Symptom Triage Checker</h3>
           </div>
           <button onClick={onClose} className="p-1 hover:bg-gray-100 rounded-full">
-            <X className="w-4 h-4 text-gray-500" />
+            <X className="w-4 h-4 text-nhs-muted" />
           </button>
         </div>
 
         {/* Scrollable Form Body */}
         <div className="overflow-y-auto space-y-4 pr-1 text-xs flex-1">
           <form id="triage-form" onSubmit={handleTriage} className="space-y-4">
-            {/* Symptoms & Duration fields */}
-            <div>
-              <label className="block font-bold text-gray-700 mb-1">Describe your main symptoms</label>
-              <textarea
-                rows={2}
-                value={symptoms}
-                onChange={(e) => setSymptoms(e.target.value)}
-                placeholder="e.g. Chest tightness, shortness of breath, headache..."
-                className="w-full border border-gray-300 rounded-xl p-3 text-xs focus:ring-2 focus:ring-green-600 resize-none"
-              />
-            </div>
-
-            <div>
-              <label className="block font-bold text-gray-700 mb-1">Duration of symptoms</label>
-              <select
-                value={duration}
-                onChange={(e) => setDuration(e.target.value)}
-                className="w-full border border-gray-300 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-green-600"
-              >
-                <option value="Less than 24 hours">Less than 24 hours</option>
-                <option value="1 to 3 days">1 to 3 days</option>
-                <option value="More than a week">More than a week</option>
-              </select>
-            </div>
-
-            {/* LightGBM Physiological Vital Signs Section */}
-            <div className="p-3 bg-gray-50 border border-gray-200 rounded-xl space-y-3">
-              <div className="flex items-center gap-1.5 font-bold text-gray-800 text-[11px]">
-                <Activity className="w-3.5 h-3.5 text-green-700" />
-                <span>Physiological Vital Signs (Required for LightGBM Model)</span>
+            {/* Basic Info Section */}
+            <div className="space-y-3">
+              <h4 className="font-semibold text-sm text-nhs-text border-b border-nhs-border pb-1">Basic info</h4>
+              <div>
+                <label className="block text-xs font-semibold text-nhs-muted mb-1">Age (yrs)</label>
+                <input
+                  type="number"
+                  min="1"
+                  max="120"
+                  value={age}
+                  onChange={(e) => setAge(e.target.value ? Number(e.target.value) : '')}
+                  className="w-full sm:w-1/3 border border-nhs-border rounded-md p-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-nhs-blue"
+                />
               </div>
+            </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {/* Vitals Section */}
+            <div className="space-y-3">
+              <h4 className="font-semibold text-sm text-nhs-text border-b border-nhs-border pb-1">Vitals</h4>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-[11px] font-semibold text-gray-600 mb-0.5">Age (yrs)</label>
-                  <input
-                    type="number"
-                    min="1"
-                    max="120"
-                    value={age}
-                    onChange={(e) => setAge(e.target.value ? Number(e.target.value) : '')}
-                    className="w-full border border-gray-300 rounded-lg p-2 text-xs bg-white"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[11px] font-semibold text-gray-600 mb-0.5">Heart Rate (bpm)</label>
+                  <label className="block text-xs font-semibold text-nhs-muted mb-1">Heart Rate (bpm)</label>
                   <input
                     type="number"
                     min="30"
                     max="250"
                     value={heartRate}
                     onChange={(e) => setHeartRate(e.target.value ? Number(e.target.value) : '')}
-                    className="w-full border border-gray-300 rounded-lg p-2 text-xs bg-white"
+                    className="w-full border border-nhs-border rounded-md p-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-nhs-blue"
                   />
                 </div>
-
                 <div>
-                  <label className="block text-[11px] font-semibold text-gray-600 mb-0.5">Systolic BP (mmHg)</label>
+                  <label className="block text-xs font-semibold text-nhs-muted mb-1">Systolic BP (mmHg)</label>
                   <input
                     type="number"
                     min="50"
                     max="250"
                     value={systolicBP}
                     onChange={(e) => setSystolicBP(e.target.value ? Number(e.target.value) : '')}
-                    className="w-full border border-gray-300 rounded-lg p-2 text-xs bg-white"
+                    className="w-full border border-nhs-border rounded-md p-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-nhs-blue"
                   />
                 </div>
-
                 <div>
-                  <label className="block text-[11px] font-semibold text-gray-600 mb-0.5">Resp Rate (/min)</label>
+                  <label className="block text-xs font-semibold text-nhs-muted mb-1">Resp Rate (/min)</label>
                   <input
                     type="number"
                     min="8"
                     max="60"
                     value={respiratoryRate}
                     onChange={(e) => setRespiratoryRate(e.target.value ? Number(e.target.value) : '')}
-                    className="w-full border border-gray-300 rounded-lg p-2 text-xs bg-white"
+                    className="w-full border border-nhs-border rounded-md p-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-nhs-blue"
                   />
                 </div>
-
                 <div>
-                  <label className="block text-[11px] font-semibold text-gray-600 mb-0.5">SpO2 (%)</label>
+                  <label className="block text-xs font-semibold text-nhs-muted mb-1">SpO2 (%)</label>
                   <input
                     type="number"
                     min="50"
                     max="100"
                     value={spo2}
                     onChange={(e) => setSpo2(e.target.value ? Number(e.target.value) : '')}
-                    className="w-full border border-gray-300 rounded-lg p-2 text-xs bg-white"
+                    className="w-full border border-nhs-border rounded-md p-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-nhs-blue"
                   />
                 </div>
-
                 <div>
-                  <label className="block text-[11px] font-semibold text-gray-600 mb-0.5">Temp (°C)</label>
+                  <label className="block text-xs font-semibold text-nhs-muted mb-1">Temp (°C)</label>
                   <input
                     type="number"
                     step="0.1"
@@ -297,19 +268,45 @@ export const SymptomTriageModal: React.FC<{ onClose: () => void }> = ({ onClose 
                     max="45"
                     value={temperatureC}
                     onChange={(e) => setTemperatureC(e.target.value ? Number(e.target.value) : '')}
-                    className="w-full border border-gray-300 rounded-lg p-2 text-xs bg-white"
+                    className="w-full border border-nhs-border rounded-md p-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-nhs-blue"
                   />
                 </div>
               </div>
+            </div>
 
-              {/* Consciousness & Pain Score */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+            {/* Symptoms Section */}
+            <div className="space-y-4">
+              <h4 className="font-semibold text-sm text-nhs-text border-b border-nhs-border pb-1">Symptoms</h4>
+              <div>
+                <label className="block text-xs font-semibold text-nhs-muted mb-1">Describe your main symptoms</label>
+                <textarea
+                  rows={2}
+                  value={symptoms}
+                  onChange={(e) => setSymptoms(e.target.value)}
+                  placeholder="e.g. Chest tightness, shortness of breath, headache..."
+                  className="w-full border border-nhs-border rounded-md p-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-nhs-blue resize-none"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[11px] font-semibold text-gray-600 mb-0.5">Consciousness (AVPU)</label>
+                  <label className="block text-xs font-semibold text-nhs-muted mb-1">Duration of symptoms</label>
+                  <select
+                    value={duration}
+                    onChange={(e) => setDuration(e.target.value)}
+                    className="w-full border border-nhs-border rounded-md px-3 py-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-nhs-blue bg-white"
+                  >
+                    <option value="Less than 24 hours">Less than 24 hours</option>
+                    <option value="1 to 3 days">1 to 3 days</option>
+                    <option value="More than a week">More than a week</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-nhs-muted mb-1">Consciousness (AVPU)</label>
                   <select
                     value={consciousness}
                     onChange={(e) => setConsciousness(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg p-2 text-xs bg-white"
+                    className="w-full border border-nhs-border rounded-md px-3 py-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-nhs-blue bg-white"
                   >
                     <option value="A">Alert (A)</option>
                     <option value="V">Voice Responsive (V)</option>
@@ -317,31 +314,30 @@ export const SymptomTriageModal: React.FC<{ onClose: () => void }> = ({ onClose 
                     <option value="U">Unresponsive (U)</option>
                   </select>
                 </div>
-
-                <div>
-                  <div className="flex justify-between items-center mb-0.5">
-                    <label className="text-[11px] font-semibold text-gray-600">Pain Score (0–10)</label>
-                    <span className="font-bold text-gray-800 text-[11px]">{painScore} / 10</span>
-                  </div>
-                  <input
-                    type="range"
-                    min="0"
-                    max="10"
-                    value={painScore}
-                    onChange={(e) => setPainScore(Number(e.target.value))}
-                    className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-700"
-                  />
-                </div>
               </div>
 
-              {/* Clinical Indicator Checkboxes */}
-              <div className="flex flex-wrap gap-4 pt-1 text-[11px] font-medium text-gray-700">
+              <div>
+                <div className="flex justify-between items-center mb-1">
+                  <label className="text-xs font-semibold text-nhs-muted">Pain Score (0–10)</label>
+                  <span className="font-semibold text-nhs-text text-xs">{painScore} / 10</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value={painScore}
+                  onChange={(e) => setPainScore(Number(e.target.value))}
+                  className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-nhs-blue"
+                />
+              </div>
+
+              <div className="flex flex-wrap gap-4 pt-1 text-xs font-medium text-nhs-muted">
                 <label className="flex items-center gap-1.5 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={chestPain}
                     onChange={(e) => setChestPain(e.target.checked)}
-                    className="rounded text-green-700 focus:ring-green-600"
+                    className="rounded text-nhs-blue focus:ring-nhs-blue"
                   />
                   Chest Pain
                 </label>
@@ -350,7 +346,7 @@ export const SymptomTriageModal: React.FC<{ onClose: () => void }> = ({ onClose 
                     type="checkbox"
                     checked={breathingDifficulty}
                     onChange={(e) => setBreathingDifficulty(e.target.checked)}
-                    className="rounded text-green-700 focus:ring-green-600"
+                    className="rounded text-nhs-blue focus:ring-nhs-blue"
                   />
                   Breathing Difficulty
                 </label>
@@ -359,7 +355,7 @@ export const SymptomTriageModal: React.FC<{ onClose: () => void }> = ({ onClose 
                     type="checkbox"
                     checked={activeBleeding}
                     onChange={(e) => setActiveBleeding(e.target.checked)}
-                    className="rounded text-green-700 focus:ring-green-600"
+                    className="rounded text-nhs-blue focus:ring-nhs-blue"
                   />
                   Active Bleeding
                 </label>
@@ -368,7 +364,7 @@ export const SymptomTriageModal: React.FC<{ onClose: () => void }> = ({ onClose 
 
             {/* Error Message Display */}
             {errorMsg && (
-              <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-xs font-semibold">
+              <div className="p-3 bg-red-50 border border-red-200 rounded-md text-red-700 text-xs font-semibold">
                 {errorMsg}
               </div>
             )}
@@ -377,82 +373,65 @@ export const SymptomTriageModal: React.FC<{ onClose: () => void }> = ({ onClose 
             <button
               type="submit"
               disabled={loading || !symptoms.trim()}
-              className="w-full py-2.5 bg-green-700 hover:bg-green-800 text-white rounded-xl font-bold transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full py-2 bg-nhs-blue hover:bg-nhs-dark text-white rounded-md text-sm font-medium transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Stethoscope className="w-4 h-4" />}
-              {loading ? 'Running LightGBM Model Inference...' : 'Run Triage Assessment'}
+              {loading ? 'Running model inference...' : 'Run triage assessment'}
             </button>
           </form>
 
-          {/* AI Triage Recommendation Result Panel */}
+          {/* Clinical Triage Recommendation Result Panel */}
           {triageData && (
-            <div className="space-y-4">
+            <div className="space-y-4 pt-4 border-t border-nhs-border">
               {/* SPECIAL CRITICAL EMERGENCY ESCALATION PANEL */}
               {triageData.prediction === 'CRITICAL' && (
-                <div className="p-4 bg-red-50 border-2 border-red-500 rounded-xl space-y-4 shadow-sm animate-in fade-in">
-                  <div className="flex items-center justify-between border-b border-red-200 pb-2">
-                    <div className="flex items-center gap-2">
-                      <AlertTriangle className="w-5 h-5 text-red-600 animate-pulse" />
-                      <h4 className="font-extrabold text-sm text-red-950 uppercase tracking-wide">
-                        CRITICAL TRIAGE RESULT — EMERGENCY ESCALATION REQUIRED
-                      </h4>
-                    </div>
-                    <span className="px-2.5 py-0.5 bg-red-600 text-white font-extrabold text-[10px] rounded-md uppercase">
-                      ESI LEVEL 1 (CRITICAL)
-                    </span>
-                  </div>
-
-                  <p className="text-xs font-semibold text-red-900 leading-snug">
-                    Immediate emergency assessment is required. The submitted clinical parameters indicate critical high acuity.
-                  </p>
-
-                  <div className="grid grid-cols-2 gap-3 bg-white p-3 rounded-lg border border-red-200 text-xs">
-                    <div>
-                      <span className="text-[10px] font-medium text-gray-500 block">Predicted Severity</span>
-                      <span className="font-extrabold text-red-700 text-sm">CRITICAL</span>
-                    </div>
-                    <div>
-                      <span className="text-[10px] font-medium text-gray-500 block">Model Confidence</span>
-                      <span className="font-extrabold text-gray-900 text-sm">{triageData.confidence}%</span>
-                    </div>
-                    <div>
-                      <span className="text-[10px] font-medium text-gray-500 block">Emergency Services Line</span>
-                      <span className="font-extrabold text-red-600 text-sm">Emergency: {emergencyNumber}</span>
-                    </div>
-                    <div>
-                      <span className="text-[10px] font-medium text-gray-500 block">Triage Alert Status</span>
-                      <span className="font-extrabold text-emerald-700 text-xs flex items-center gap-1">
-                        <ShieldAlert className="w-3.5 h-3.5" /> Created & Escalated
+                <div className="p-4 bg-red-50 border border-red-200 rounded-md space-y-4 shadow-sm">
+                  <div className="flex flex-col gap-3 border-b border-red-200 pb-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <AlertTriangle className="w-5 h-5 text-red-700" />
+                        <h4 className="font-semibold text-base text-red-900">
+                          Critical triage result
+                        </h4>
+                      </div>
+                      <span className="px-2 py-0.5 bg-red-100 text-red-800 border border-red-200 font-medium text-xs rounded-md">
+                        Level 1 (Critical)
                       </span>
                     </div>
+                    <p className="text-sm font-medium text-red-800">
+                      Immediate emergency assessment is required. This is not a medical diagnosis.
+                    </p>
+                    
+                    {/* Call Emergency Action First */}
+                    <a
+                      href={`tel:${emergencyNumber}`}
+                      onClick={handleCallClick}
+                      className="w-full sm:w-auto px-4 py-2.5 bg-red-700 text-white font-medium text-sm rounded-md hover:bg-red-800 inline-flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+                    >
+                      <PhoneCall className="w-4 h-4" />
+                      Call emergency services ({emergencyNumber})
+                    </a>
                   </div>
 
-                  {/* Call Emergency Action */}
-                  <div className="p-3.5 bg-red-600 text-white rounded-xl space-y-2 text-center shadow-md">
-                    <p className="text-xs font-bold">Need Immediate Life-Threatening Care?</p>
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
-                      <a
-                        href={`tel:${emergencyNumber}`}
-                        onClick={handleCallClick}
-                        className="w-full sm:w-auto px-5 py-2.5 bg-white text-red-700 font-extrabold text-xs rounded-lg shadow-xs hover:bg-red-50 transition-colors inline-flex items-center justify-center gap-2"
-                      >
-                        <PhoneCall className="w-4 h-4 text-red-600" />
-                        Call Emergency Services ({emergencyNumber})
-                      </a>
+                  <div className="grid grid-cols-2 gap-3 bg-white p-3 rounded-md border border-red-100 text-xs">
+                    <div>
+                      <span className="text-nhs-muted block mb-0.5">Predicted severity</span>
+                      <span className="font-semibold text-red-700 text-sm">Critical</span>
                     </div>
-                    <p className="text-[10px] text-red-100">
-                      If on a desktop browser, dial <strong>{emergencyNumber}</strong> directly on any telephone or mobile device.
-                    </p>
+                    <div>
+                      <span className="text-nhs-muted block mb-0.5">Model confidence</span>
+                      <span className="font-medium text-nhs-text text-sm">{triageData.confidence}%</span>
+                    </div>
                   </div>
 
                   {/* Nearest Emergency Hospital Section */}
-                  <div className="p-3 bg-white rounded-xl border border-red-200 text-xs space-y-2">
-                    <div className="flex items-center justify-between font-bold text-gray-900">
+                  <div className="p-3 bg-white rounded-md border border-red-200 text-xs space-y-2">
+                    <div className="flex items-center justify-between font-semibold text-nhs-text">
                       <span className="flex items-center gap-1.5 text-red-950">
                         <Building2 className="w-4 h-4 text-red-600" /> Nearest Emergency Hospital
                       </span>
                       {nearestHospitalData?.distanceKm !== null && nearestHospitalData?.distanceKm !== undefined && (
-                        <span className="px-2 py-0.5 bg-blue-50 text-blue-800 text-[10px] font-bold rounded-md">
+                        <span className="px-2 py-0.5 bg-blue-50 text-blue-800 text-[10px] font-semibold rounded-md">
                           Distance: {nearestHospitalData.distanceKm} km
                         </span>
                       )}
@@ -464,39 +443,39 @@ export const SymptomTriageModal: React.FC<{ onClose: () => void }> = ({ onClose 
                         <button
                           type="button"
                           onClick={requestUserLocation}
-                          className="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-md text-xs flex items-center gap-1.5"
+                          className="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-md text-xs flex items-center gap-1.5"
                         >
                           <MapPin className="w-3.5 h-3.5" /> Share Location
                         </button>
                       </div>
                     ) : hospitalLoading ? (
-                      <div className="flex items-center gap-2 text-xs text-gray-500 py-2">
+                      <div className="flex items-center gap-2 text-xs text-nhs-muted py-2">
                         <Loader2 className="w-4 h-4 animate-spin text-red-600" /> Locating nearest emergency facility in hospital directory...
                       </div>
                     ) : nearestHospitalData?.hospital ? (
-                      <div className="p-3 bg-gray-50 rounded-lg border border-gray-200 space-y-1.5 text-xs text-gray-800">
+                      <div className="p-3 bg-gray-50 rounded-lg border border-nhs-border space-y-1.5 text-xs text-nhs-text">
                         <div className="flex items-center justify-between">
-                          <h5 className="font-extrabold text-gray-900">{nearestHospitalData.hospital.name}</h5>
-                          <span className="text-[10px] font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded">Emergency Capable</span>
+                          <h5 className="font-semibold text-nhs-text">{nearestHospitalData.hospital.name}</h5>
+                          <span className="text-[10px] font-semibold text-green-700 bg-green-50 px-2 py-0.5 rounded">Emergency Capable</span>
                         </div>
-                        <p className="text-[11px] text-gray-600"><strong>Address:</strong> {nearestHospitalData.hospital.address}</p>
-                        <p className="text-[11px] text-gray-600"><strong>Phone:</strong> {nearestHospitalData.hospital.phone}</p>
+                        <p className="text-[11px] text-nhs-muted"><strong>Address:</strong> {nearestHospitalData.hospital.address}</p>
+                        <p className="text-[11px] text-nhs-muted"><strong>Phone:</strong> {nearestHospitalData.hospital.phone}</p>
                       </div>
                     ) : (
-                      <div className="p-2.5 bg-gray-50 border border-gray-200 rounded-lg text-[11px] text-gray-700">
+                      <div className="p-2.5 bg-gray-50 border border-nhs-border rounded-lg text-[11px] text-nhs-muted">
                         {nearestHospitalData?.message || 'Nearest hospital could not be determined automatically. Emergency number: 999.'}
                       </div>
                     )}
                   </div>
 
                   {/* Authorized Emergency Information Sharing Section */}
-                  <div className="p-3 bg-white rounded-xl border border-red-200 text-xs space-y-2">
+                  <div className="p-3 bg-white rounded-md border border-red-200 text-xs space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-gray-900 flex items-center gap-1.5">
-                        <Share2 className="w-4 h-4 text-blue-600" /> Authorized Emergency Information Sharing
+                      <span className="font-semibold text-nhs-text flex items-center gap-1.5">
+                        <Share2 className="w-4 h-4 text-nhs-blue" /> Authorized Emergency Information Sharing
                       </span>
                       {infoShared && (
-                        <span className="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-bold rounded-md flex items-center gap-1">
+                        <span className="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-semibold rounded-md flex items-center gap-1">
                           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" /> Shared
                         </span>
                       )}
@@ -504,21 +483,21 @@ export const SymptomTriageModal: React.FC<{ onClose: () => void }> = ({ onClose 
 
                     {!infoShared ? (
                       <div className="space-y-2">
-                        <p className="text-[11px] text-gray-600">
+                        <p className="text-[11px] text-nhs-muted">
                           Share essential triage vitals, patient ID, and assessment summary with emergency clinicians at {nearestHospitalData?.hospital?.name || 'Emergency Department (A&E)'}.
                         </p>
                         {!showConsentModal ? (
                           <button
                             type="button"
                             onClick={() => setShowConsentModal(true)}
-                            className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-xs flex items-center gap-1.5"
+                            className="px-3.5 py-1.5 bg-nhs-blue hover:bg-nhs-dark text-white font-semibold rounded-lg text-xs flex items-center gap-1.5"
                           >
                             <Share2 className="w-3.5 h-3.5" /> Share Emergency Information
                           </button>
                         ) : (
-                          <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl space-y-2.5 text-xs text-blue-950">
-                            <p className="font-bold text-blue-900">Confirm Emergency Data Transfer</p>
-                            <div className="text-[11px] space-y-1 bg-white/90 p-2.5 rounded-lg border border-blue-200">
+                          <div className="p-3 bg-blue-50 border border-blue-200 rounded-md space-y-2.5 text-xs text-blue-950">
+                            <p className="font-semibold text-blue-900">Confirm Emergency Data Transfer</p>
+                            <div className="text-[11px] space-y-1  p-2.5 rounded-lg border border-blue-200">
                               <p><strong>Destination:</strong> {nearestHospitalData?.hospital?.name || 'Emergency Department (A&E)'}</p>
                               <p><strong>Information to be shared:</strong> Patient ID, Age ({age}y), Triage Vitals (HR: {heartRate}, BP: {systolicBP}, SpO2: {spo2}%), ESI Severity (CRITICAL), Assessment ID ({triageData.assessmentId}).</p>
                             </div>
@@ -527,7 +506,7 @@ export const SymptomTriageModal: React.FC<{ onClose: () => void }> = ({ onClose 
                                 type="button"
                                 onClick={handleShareInformation}
                                 disabled={sharingLoading}
-                                className="px-3.5 py-1.5 bg-blue-700 hover:bg-blue-800 text-white font-bold rounded-lg text-xs flex items-center gap-1.5 disabled:opacity-50"
+                                className="px-3.5 py-1.5 bg-blue-700 hover:bg-blue-800 text-white font-semibold rounded-lg text-xs flex items-center gap-1.5 disabled:opacity-50"
                               >
                                 {sharingLoading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <CheckCircle2 className="w-3.5 h-3.5" />}
                                 Share
@@ -535,7 +514,7 @@ export const SymptomTriageModal: React.FC<{ onClose: () => void }> = ({ onClose 
                               <button
                                 type="button"
                                 onClick={() => setShowConsentModal(false)}
-                                className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold rounded-lg text-xs"
+                                className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-nhs-text font-semibold rounded-lg text-xs"
                               >
                                 Cancel
                               </button>
@@ -554,13 +533,13 @@ export const SymptomTriageModal: React.FC<{ onClose: () => void }> = ({ onClose 
               )}
 
               {/* Standard Triage Output Box */}
-              <div className="p-4 bg-green-50/80 border border-green-300 rounded-xl text-xs space-y-3">
+              <div className="p-4 bg-green-50/80 border border-green-300 rounded-md text-xs space-y-3">
                 <div className="flex items-center justify-between border-b border-green-200 pb-2">
-                  <div className="flex items-center gap-1.5 font-bold text-green-900">
+                  <div className="flex items-center gap-1.5 font-semibold text-green-900">
                     <AlertTriangle className="w-4 h-4 text-green-700" />
                     <span>AI Triage Recommendation (LightGBM Output)</span>
                   </div>
-                  <span className="text-[10px] font-bold px-2 py-0.5 bg-green-200 text-green-900 rounded-md">
+                  <span className="text-[10px] font-semibold px-2 py-0.5 bg-green-200 text-green-900 rounded-md">
                     {triageData.model?.name} v{triageData.model?.version}
                   </span>
                 </div>
@@ -568,9 +547,9 @@ export const SymptomTriageModal: React.FC<{ onClose: () => void }> = ({ onClose 
                 {/* Prediction Result Badges */}
                 <div className="grid grid-cols-2 gap-3">
                   <div className="bg-white p-2.5 rounded-lg border border-green-200">
-                    <span className="text-[10px] text-gray-500 font-medium block">Predicted ESI Severity</span>
+                    <span className="text-[10px] text-nhs-muted font-medium block">Predicted ESI Severity</span>
                     <span
-                      className={`font-extrabold text-sm ${
+                      className={`font-semibold text-sm ${
                         triageData.prediction === 'CRITICAL' || triageData.prediction === 'EMERGENT'
                           ? 'text-red-600'
                           : triageData.prediction === 'URGENT'
@@ -583,23 +562,23 @@ export const SymptomTriageModal: React.FC<{ onClose: () => void }> = ({ onClose 
                   </div>
 
                   <div className="bg-white p-2.5 rounded-lg border border-green-200">
-                    <span className="text-[10px] text-gray-500 font-medium block">Model Confidence</span>
-                    <span className="font-extrabold text-sm text-gray-900">
+                    <span className="text-[10px] text-nhs-muted font-medium block">Model Confidence</span>
+                    <span className="font-semibold text-sm text-nhs-text">
                       {triageData.confidence}%
                     </span>
                   </div>
                 </div>
 
                 {/* Assessment Rationale */}
-                <div className="text-gray-700 leading-relaxed space-y-1">
-                  <p className="font-semibold text-gray-900">Clinical Assessment Rationale:</p>
+                <div className="text-nhs-muted leading-relaxed space-y-1">
+                  <p className="font-semibold text-nhs-text">Clinical Assessment Rationale:</p>
                   <p>{triageData.rationale}</p>
                 </div>
 
                 {/* Out of Distribution Warning Badge */}
                 {triageData.is_out_of_distribution && triageData.ood_warnings?.length > 0 && (
                   <div className="p-3 bg-amber-50 border border-amber-300 rounded-lg text-[11px] text-amber-900 space-y-1">
-                    <div className="flex items-center gap-1.5 font-bold text-amber-900">
+                    <div className="flex items-center gap-1.5 font-semibold text-amber-900">
                       <AlertTriangle className="w-3.5 h-3.5 text-amber-700" />
                       <span>Out-of-Distribution Input Warning</span>
                     </div>
@@ -620,22 +599,22 @@ export const SymptomTriageModal: React.FC<{ onClose: () => void }> = ({ onClose 
                 {/* Class Probabilities Distribution (All 5 ESI Classes) */}
                 {triageData.probabilities && (
                   <div className="bg-white p-3 rounded-lg border border-green-200 space-y-1.5">
-                    <div className="flex items-center justify-between text-[10px] font-bold text-gray-700">
+                    <div className="flex items-center justify-between text-[10px] font-semibold text-nhs-muted">
                       <span>LightGBM Multiclass Probabilities:</span>
-                      <span className="text-gray-500">Sum: {Math.round((triageData.probability_sum || 1.0) * 100)}%</span>
+                      <span className="text-nhs-muted">Sum: {Math.round((triageData.probability_sum || 1.0) * 100)}%</span>
                     </div>
-                    <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 text-[10px] font-medium text-gray-600 border-t border-gray-100 pt-1.5">
-                      <div>Critical: <span className="font-bold text-gray-900">{Math.round((triageData.probabilities.CRITICAL || 0) * 100)}%</span></div>
-                      <div>Emergent: <span className="font-bold text-gray-900">{Math.round((triageData.probabilities.EMERGENT || 0) * 100)}%</span></div>
-                      <div>Urgent: <span className="font-bold text-gray-900">{Math.round((triageData.probabilities.URGENT || 0) * 100)}%</span></div>
-                      <div>Less Urgent: <span className="font-bold text-gray-900">{Math.round((triageData.probabilities.LESS_URGENT || 0) * 100)}%</span></div>
-                      <div>Non Urgent: <span className="font-bold text-gray-900">{Math.round((triageData.probabilities.NON_URGENT || 0) * 100)}%</span></div>
+                    <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 text-[10px] font-medium text-nhs-muted border-t border-nhs-border pt-1.5">
+                      <div>Critical: <span className="font-semibold text-nhs-text">{Math.round((triageData.probabilities.CRITICAL || 0) * 100)}%</span></div>
+                      <div>Emergent: <span className="font-semibold text-nhs-text">{Math.round((triageData.probabilities.EMERGENT || 0) * 100)}%</span></div>
+                      <div>Urgent: <span className="font-semibold text-nhs-text">{Math.round((triageData.probabilities.URGENT || 0) * 100)}%</span></div>
+                      <div>Less Urgent: <span className="font-semibold text-nhs-text">{Math.round((triageData.probabilities.LESS_URGENT || 0) * 100)}%</span></div>
+                      <div>Non Urgent: <span className="font-semibold text-nhs-text">{Math.round((triageData.probabilities.NON_URGENT || 0) * 100)}%</span></div>
                     </div>
                   </div>
                 )}
 
                 {/* Synthetic Data Disclosure */}
-                <div className="flex items-start gap-1.5 text-[10px] text-gray-500 pt-1 border-t border-green-200">
+                <div className="flex items-start gap-1.5 text-[10px] text-nhs-muted pt-1 border-t border-green-200">
                   <Info className="w-3.5 h-3.5 text-gray-400 flex-shrink-0 mt-0.5" />
                   <span>
                     <strong>Dataset: Synthetic ({triageData.model?.dataset})</strong> · Purpose: Development / Demo · Not a medical diagnosis.
