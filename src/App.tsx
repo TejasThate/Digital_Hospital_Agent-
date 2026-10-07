@@ -25,7 +25,7 @@ import { FacilitiesServicesPage } from './pages/FacilitiesServicesPage';
 import { SupportGuidelinesPage } from './pages/SupportGuidelinesPage';
 
 export default function App() {
-  const [role, setRole] = useState<UserRole>('Patient');
+  const [role, setRole] = useState<UserRole>('Admin');
   const [activeNav, setActiveNav] = useState('Dashboard');
   const [sidebarTab, setSidebarTab] = useState('Home Dashboard');
 
